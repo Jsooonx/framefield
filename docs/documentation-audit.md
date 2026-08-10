@@ -377,3 +377,12 @@ Per 2026-08-09:
 - Reason: CTA katalog adalah wrapper milik Framefield, bukan bagian dari section standalone yang akan direbuild oleh user lain.
 - Source of truth updated: `library/sections/material-office/source/MaterialOffice.tsx`, `library/sections/material-office/source/material-office.css`, kedua salinan `master-prompt.md`, `src/app/page.tsx`, `library/sections/material-office/design.md`, `docs/framefield-overview.md`, dan `tests/material-office.test.mjs`.
 - Follow-up: Section prompt berikutnya wajib memisahkan implementasi section dari fitur delivery milik katalog.
+
+### 2026-08-10 — Material Office master prompt removes Framefield return control
+
+- Type: Fixed | Changed
+- Area: Prompt product | Documentation
+- Decision: Menghapus `Back to library` dari master prompt beserta markup, icon, CSS, dan acceptance criteria. Control tersebut tetap hanya berada pada preview route Framefield sebagai wrapper navigasi katalog.
+- Reason: Master prompt harus merekonstruksi section secara standalone tanpa membawa koneksi navigasi atau UI khusus Framefield.
+- Source of truth updated: kedua salinan `library/sections/material-office/master-prompt.md` dan `tests/material-office.test.mjs`.
+- Follow-up: Master prompt standalone tidak boleh membawa `Back to library`; implementasi host boleh menambahkan navigation wrapper di luar canonical section bila diperlukan.

@@ -33,7 +33,6 @@ Render MaterialOffice as a full viewport page. The page shell may be adapted to 
 
 - Keep the hosted asset URLs exactly as written.
 - Prompt copying belongs to the host library/catalog wrapper, not to this standalone section. Do not add a prompt-copy button or clipboard logic to the Material Office page.
-- The Back to library href in the code block is a neutral host adapter. Replace only its destination if the host application needs another return URL; do not alter its position, dimensions, styling, icon, or entrance timing.
 - Do not add a different navbar, footer, CMS, authentication, database, payment flow, or unrelated sections.
 
 ## 5. Canonical implementation
@@ -44,7 +43,7 @@ Use the following TSX verbatim. Do not change class names, DOM order, constants,
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowLeft, ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import "./material-office.css";
 
@@ -180,13 +179,6 @@ export function MaterialOffice() {
             <ArrowUpRight size={17} aria-hidden="true" />
           </aside>
         </motion.div>
-
-        <motion.a className="material-office__back" href="#material-office-top" {...entrance(0.98, 8)}>
-          <span className="material-office__back-icon" aria-hidden="true">
-            <ArrowLeft size={13} strokeWidth={2} />
-          </span>
-          Back to library
-        </motion.a>
 
         <AnimatePresence initial={false}>
           {menuOpen && (
@@ -327,8 +319,7 @@ Use the following CSS verbatim. Do not change dimensions, colors, breakpoints, z
 .material-office__services,
 .material-office__statement,
 .material-office__actions,
-.material-office__availability,
-.material-office__back {
+    .material-office__availability {
   position: relative;
   z-index: 4;
 }
@@ -507,53 +498,6 @@ Use the following CSS verbatim. Do not change dimensions, colors, breakpoints, z
 .material-office__availability p { margin: 0 0 4px; font-size: 10px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; }
 .material-office__availability strong { font-size: 14px; letter-spacing: -0.04em; }
 
-.material-office__back {
-  position: absolute;
-  right: clamp(24px, 3.7vw, 56px);
-  bottom: 14px;
-  display: inline-flex;
-  gap: 9px;
-  align-items: center;
-  padding: 5px 11px 5px 6px;
-  border: 1px solid rgba(243, 240, 231, 0.28);
-  border-radius: 999px;
-  color: inherit;
-  background: rgba(16, 18, 20, 0.46);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-  backdrop-filter: blur(14px);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  text-decoration: none;
-  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease;
-}
-
-.material-office__back:hover,
-.material-office__back:focus-visible {
-  border-color: rgba(243, 240, 231, 0.58);
-  color: #c8ff4a;
-  background: rgba(16, 18, 20, 0.72);
-}
-
-.material-office__back-icon {
-  display: grid;
-  width: 22px;
-  height: 22px;
-  place-items: center;
-  border: 1px solid rgba(243, 240, 231, 0.48);
-  border-radius: 50%;
-  color: #c8ff4a;
-  background: rgba(200, 255, 74, 0.08);
-  transition: border-color 180ms ease, background-color 180ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.material-office__back:hover .material-office__back-icon,
-.material-office__back:focus-visible .material-office__back-icon {
-  border-color: rgba(200, 255, 74, 0.72);
-  background: rgba(200, 255, 74, 0.16);
-  transform: translateX(-2px);
-}
-
 .material-office__menu-layer {
   position: absolute;
   z-index: 10;
@@ -711,7 +655,6 @@ Use the following CSS verbatim. Do not change dimensions, colors, breakpoints, z
   .material-office__statement { right: 20px; bottom: 88px; left: 20px; font-size: 16px; }
   .material-office__actions { right: 20px; bottom: 18px; left: 20px; gap: 8px; }
   .material-office__availability { min-width: 0; flex: 1; padding: 15px 14px; }
-  .material-office__back { right: 20px; bottom: 128px; }
   .material-office__menu { padding: 18px 20px; }
   .material-office__menu-count { display: none; }
   .material-office__menu-layout { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) 112px auto; gap: 18px; padding-top: 24px; }
@@ -782,7 +725,7 @@ Use the following CSS verbatim. Do not change dimensions, colors, breakpoints, z
 - The hero canvas fills the viewport with the exact rounded frame and dark overlay.
 - The header stays pinned to the top edge.
 - MATERIAL and OFFICE use the exact wordmark hierarchy and optical alignment from the code.
-- The services, statement, availability card, and Back to library control retain their exact positions and timing.
+- The services, statement, and availability card retain their exact positions and timing.
 - The menu is a right-side drawer on desktop and uses the exact backdrop, close, Escape, body-scroll-lock, stagger, and mirrored exit behavior.
 - Menu hover affects only the visible label text.
 - No horizontal overflow appears at the desktop and mobile target viewports.

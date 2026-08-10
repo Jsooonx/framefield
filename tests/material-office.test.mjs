@@ -80,6 +80,8 @@ test("Material Office keeps prompt copying outside the dedicated preview", () =>
   assert.doesNotMatch(prompt, /navigator\.clipboard/);
   assert.doesNotMatch(prompt, /material-office__prompt-copy/);
   assert.doesNotMatch(prompt, /MASTER_PROMPT_URL/);
+  assert.doesNotMatch(prompt, /Back to library/);
+  assert.doesNotMatch(prompt, /material-office__back/);
   assert.doesNotMatch(content, /Copy Prompt/);
   assert.doesNotMatch(content, /navigator\.clipboard/);
   assert.doesNotMatch(content, /material-office__prompt-copy/);
