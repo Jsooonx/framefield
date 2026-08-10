@@ -87,6 +87,7 @@ test("Material Office provides the full preview interaction contract", () => {
 
   assert.match(content, /hero-poster\.webp/);
   assert.match(content, /hero-video\.mp4/);
+  assert.match(content, /assets\.framefield\.my\.id\/sections\/material-office\/hero-video\.webm/);
   assert.match(content, /available:\s*true/);
   assert.match(content, /aria-expanded/);
   assert.match(content, /Escape/);

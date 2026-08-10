@@ -8,7 +8,7 @@ import "./material-office.css";
 const HERO_POSTER = "https://assets.framefield.my.id/sections/material-office/hero-poster.webp";
 const HERO_VIDEO = {
   mp4: "https://assets.framefield.my.id/sections/material-office/hero-video.mp4",
-  webm: "/library/sections/material-office/hero-video.webm",
+  webm: "https://assets.framefield.my.id/sections/material-office/hero-video.webm",
   available: true,
 };
 const MASTER_PROMPT_URL = "/library/sections/material-office/master-prompt.md";
