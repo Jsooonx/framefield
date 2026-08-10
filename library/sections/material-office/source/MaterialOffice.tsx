@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowLeft, ArrowUpRight, Copy, Menu, X } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import "./material-office.css";
 
@@ -11,8 +11,6 @@ const HERO_VIDEO = {
   webm: "https://assets.framefield.my.id/sections/material-office/hero-video.webm",
   available: true,
 };
-const MASTER_PROMPT_URL = "/library/sections/material-office/master-prompt.md";
-
 const MENU_ITEMS = ["Home", "Studio", "Projects", "Notes", "Contact"];
 const SERVICES = [
   "Brand Systems",
@@ -25,7 +23,6 @@ const ENTRANCE_EASE = [0.22, 1, 0.36, 1] as const;
 
 export function MaterialOffice() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [promptState, setPromptState] = useState<"idle" | "copying" | "copied" | "error">("idle");
   const prefersReducedMotion = useReducedMotion();
   const reduceMotion = prefersReducedMotion ?? false;
 
@@ -60,27 +57,6 @@ export function MaterialOffice() {
   function handleKeyDown(event: React.KeyboardEvent<HTMLElement>) {
     if (event.key === "Escape") {
       setMenuOpen(false);
-    }
-  }
-
-  async function copyMasterPrompt() {
-    if (promptState === "copying") return;
-
-    setPromptState("copying");
-
-    try {
-      const response = await fetch(MASTER_PROMPT_URL);
-      if (!response.ok) throw new Error("Unable to load master prompt");
-
-      const prompt = await response.text();
-      if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
-
-      await navigator.clipboard.writeText(prompt);
-      setPromptState("copied");
-      window.setTimeout(() => setPromptState("idle"), 1800);
-    } catch {
-      setPromptState("error");
-      window.setTimeout(() => setPromptState("idle"), 2200);
     }
   }
 
@@ -152,15 +128,6 @@ export function MaterialOffice() {
         </motion.p>
 
         <motion.div className="material-office__actions" {...entrance(0.88, 12)}>
-          <button
-            className="material-office__prompt-copy"
-            type="button"
-            onClick={copyMasterPrompt}
-            disabled={promptState === "copying"}
-          >
-            <Copy size={15} strokeWidth={1.8} aria-hidden="true" />
-            {promptState === "copied" ? "Copied" : promptState === "error" ? "Try again" : "Copy Prompt"}
-          </button>
           <aside className="material-office__availability" aria-label="Availability">
             <span className="material-office__availability-signal" aria-hidden="true" />
             <div>

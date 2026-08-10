@@ -355,7 +355,7 @@ Per 2026-08-09:
 
 - Type: Added | Changed
 - Area: UI | Asset pipeline | Documentation
-- Decision: Mengganti CTA catalog `Get source` menjadi `Copy Prompt` dan menambahkan CTA yang sama pada dedicated Material Office preview. Master prompt disimpan di package elemen dan dipublikasikan sebagai markdown yang dapat disalin oleh browser. Hero MP4 1.81 MB di-upload ke R2 dan dijadikan source utama, dengan WebM lokal sebagai fallback format.
+- Decision: Mengganti CTA catalog `Get source` menjadi `Copy Prompt`; dedicated Material Office preview awalnya sempat menerima CTA yang sama, lalu keputusan itu dibatalkan pada audit berikutnya. Master prompt disimpan di package elemen dan dipublikasikan sebagai markdown. Hero MP4 1.81 MB di-upload ke R2 sebagai source utama.
 - Reason: Elemen belum memiliki jalur prompt yang bisa langsung dipakai ulang, sementara source code belum menjadi delivery flow. R2 dipakai untuk media production tanpa memasukkan video besar ke runtime Worker.
 - Source of truth updated: `src/app/page.tsx`, `library/sections/material-office/source/MaterialOffice.tsx`, `library/sections/material-office/source/material-office.css`, `library/sections/material-office/master-prompt.md`, `public/library/sections/material-office/master-prompt.md`, `library/sections/material-office/design.md`, dan `docs/framefield-overview.md`.
 - Follow-up: Jika format master prompt berubah, sinkronkan file package dan file public sebelum deploy; setelah beberapa elemen tersedia, evaluasi ekstraksi CTA/prompt loader bersama.
@@ -368,3 +368,12 @@ Per 2026-08-09:
 - Reason: Pixel-perfect reproduction tidak dapat dicapai dari prose visual saja. Prompt harus membawa struktur kode dan asset source-of-truth sehingga agent lain dapat merekonstruksi lokasi, layout, dan motion secara exact tanpa repo Framefield.
 - Source of truth updated: `library/sections/material-office/master-prompt.md`, `public/library/sections/material-office/master-prompt.md`, `library/sections/material-office/design.md`, dan `tests/material-office.test.mjs`.
 - Follow-up: Master prompt elemen berikutnya wajib diperlakukan sebagai artefak standalone code-first; setiap prompt harus menyertakan exact asset mapping dan canonical source code, sementara detail katalog tetap dicatat di docs/implementation package.
+
+### 2026-08-10 — Material Office preview CTA removed
+
+- Type: Fixed | Changed
+- Area: UI | Prompt product | Documentation
+- Decision: Menghapus `Copy Prompt` dari dedicated Material Office preview. CTA hanya hidup di kartu katalog Framefield, yang sekarang mengambil isi master prompt publik secara langsung. Master prompt canonical juga dibersihkan dari clipboard logic dan CTA katalog.
+- Reason: CTA katalog adalah wrapper milik Framefield, bukan bagian dari section standalone yang akan direbuild oleh user lain.
+- Source of truth updated: `library/sections/material-office/source/MaterialOffice.tsx`, `library/sections/material-office/source/material-office.css`, kedua salinan `master-prompt.md`, `src/app/page.tsx`, `library/sections/material-office/design.md`, `docs/framefield-overview.md`, dan `tests/material-office.test.mjs`.
+- Follow-up: Section prompt berikutnya wajib memisahkan implementasi section dari fitur delivery milik katalog.

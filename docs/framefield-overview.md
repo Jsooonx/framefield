@@ -59,7 +59,7 @@ Komponen utama yang sudah ada:
 | Full preview recording → WebP | Selesai (asset pertama) | Material Office memiliki `preview.webp` sebagai fallback katalog dan `preview.mp4` sebagai live catalog preview source. |
 | Selected Works template section | Selesai | Library memiliki satu asset card `Selected Works` yang membuka full preview section. |
 | Fictional case-study child routes | Selesai | Empat route project berada di bawah `/library/sections/selected-works/<slug>` dan static-generated saat build. |
-| Prompt copy flow | Selesai (asset pertama) | Catalog card dan dedicated Material Office preview menyediakan CTA `Copy Prompt`; prompt Material Office tersedia sebagai markdown package asset. |
+| Prompt copy flow | Selesai (asset pertama) | Catalog card Material Office menyediakan CTA `Copy Prompt` yang mengambil master prompt code-first; dedicated preview tidak membawa CTA katalog. |
 | Source delivery/download flow | Belum dimulai | Belum ada backend, auth, licensing, atau payment flow. |
 | CMS/admin input | Belum dimulai | Untuk fase awal, asset registry masih dikelola dari repository. |
 

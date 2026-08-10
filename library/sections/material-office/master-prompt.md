@@ -32,7 +32,7 @@ Render MaterialOffice as a full viewport page. The page shell may be adapted to 
 ## 4. Host adapter rules
 
 - Keep the hosted asset URLs exactly as written.
-- The prompt-copy utility may read the prompt from /master-prompt.md in the host project, or may be replaced by the host application’s own prompt-copy mechanism without changing the visual layout.
+- Prompt copying belongs to the host library/catalog wrapper, not to this standalone section. Do not add a prompt-copy button or clipboard logic to the Material Office page.
 - The Back to library href in the code block is a neutral host adapter. Replace only its destination if the host application needs another return URL; do not alter its position, dimensions, styling, icon, or entrance timing.
 - Do not add a different navbar, footer, CMS, authentication, database, payment flow, or unrelated sections.
 
@@ -44,7 +44,7 @@ Use the following TSX verbatim. Do not change class names, DOM order, constants,
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowLeft, ArrowUpRight, Copy, Menu, X } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import "./material-office.css";
 
@@ -54,8 +54,6 @@ const HERO_VIDEO = {
   webm: "https://assets.framefield.my.id/sections/material-office/hero-video.webm",
   available: true,
 };
-const MASTER_PROMPT_URL = "/master-prompt.md";
-
 const MENU_ITEMS = ["Home", "Studio", "Projects", "Notes", "Contact"];
 const SERVICES = [
   "Brand Systems",
@@ -68,7 +66,6 @@ const ENTRANCE_EASE = [0.22, 1, 0.36, 1] as const;
 
 export function MaterialOffice() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [promptState, setPromptState] = useState<"idle" | "copying" | "copied" | "error">("idle");
   const prefersReducedMotion = useReducedMotion();
   const reduceMotion = prefersReducedMotion ?? false;
 
@@ -103,27 +100,6 @@ export function MaterialOffice() {
   function handleKeyDown(event: React.KeyboardEvent<HTMLElement>) {
     if (event.key === "Escape") {
       setMenuOpen(false);
-    }
-  }
-
-  async function copyMasterPrompt() {
-    if (promptState === "copying") return;
-
-    setPromptState("copying");
-
-    try {
-      const response = await fetch(MASTER_PROMPT_URL);
-      if (!response.ok) throw new Error("Unable to load master prompt");
-
-      const prompt = await response.text();
-      if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
-
-      await navigator.clipboard.writeText(prompt);
-      setPromptState("copied");
-      window.setTimeout(() => setPromptState("idle"), 1800);
-    } catch {
-      setPromptState("error");
-      window.setTimeout(() => setPromptState("idle"), 2200);
     }
   }
 
@@ -195,15 +171,6 @@ export function MaterialOffice() {
         </motion.p>
 
         <motion.div className="material-office__actions" {...entrance(0.88, 12)}>
-          <button
-            className="material-office__prompt-copy"
-            type="button"
-            onClick={copyMasterPrompt}
-            disabled={promptState === "copying"}
-          >
-            <Copy size={15} strokeWidth={1.8} aria-hidden="true" />
-            {promptState === "copied" ? "Copied" : promptState === "error" ? "Try again" : "Copy Prompt"}
-          </button>
           <aside className="material-office__availability" aria-label="Availability">
             <span className="material-office__availability-signal" aria-hidden="true" />
             <div>
@@ -514,37 +481,6 @@ Use the following CSS verbatim. Do not change dimensions, colors, breakpoints, z
   align-items: stretch;
 }
 
-.material-office__prompt-copy {
-  display: inline-flex;
-  min-width: 132px;
-  gap: 9px;
-  align-items: center;
-  justify-content: center;
-  padding: 16px 17px;
-  border: 1px solid rgba(243, 240, 231, 0.38);
-  border-radius: 15px;
-  color: #f3f0e7;
-  background: rgba(16, 18, 20, 0.5);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
-  backdrop-filter: blur(14px);
-  font: inherit;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  cursor: pointer;
-  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease, transform 180ms ease;
-}
-
-.material-office__prompt-copy:hover,
-.material-office__prompt-copy:focus-visible {
-  border-color: #f3f0e7;
-  color: #101214;
-  background: #f3f0e7;
-}
-
-.material-office__prompt-copy:active { transform: scale(0.98); }
-.material-office__prompt-copy:disabled { cursor: wait; opacity: 0.7; }
-
 .material-office__availability {
   display: grid;
   min-width: min(288px, calc(100% - 48px));
@@ -774,7 +710,6 @@ Use the following CSS verbatim. Do not change dimensions, colors, breakpoints, z
   .material-office__services { position: relative; top: auto; right: auto; align-self: end; margin: 0 20px 168px; gap: 4px; }
   .material-office__statement { right: 20px; bottom: 88px; left: 20px; font-size: 16px; }
   .material-office__actions { right: 20px; bottom: 18px; left: 20px; gap: 8px; }
-  .material-office__prompt-copy { min-width: 0; padding: 15px 14px; }
   .material-office__availability { min-width: 0; flex: 1; padding: 15px 14px; }
   .material-office__back { right: 20px; bottom: 128px; }
   .material-office__menu { padding: 18px 20px; }
@@ -847,7 +782,7 @@ Use the following CSS verbatim. Do not change dimensions, colors, breakpoints, z
 - The hero canvas fills the viewport with the exact rounded frame and dark overlay.
 - The header stays pinned to the top edge.
 - MATERIAL and OFFICE use the exact wordmark hierarchy and optical alignment from the code.
-- The services, statement, availability card, Copy Prompt control, and Back to library control retain their exact positions and timing.
+- The services, statement, availability card, and Back to library control retain their exact positions and timing.
 - The menu is a right-side drawer on desktop and uses the exact backdrop, close, Escape, body-scroll-lock, stagger, and mirrored exit behavior.
 - Menu hover affects only the visible label text.
 - No horizontal overflow appears at the desktop and mobile target viewports.

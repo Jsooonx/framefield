@@ -61,7 +61,7 @@ test("Material Office metadata identifies the preview route", () => {
   assert.match(content, /route:\s*"\/library\/sections\/material-office"/);
 });
 
-test("Material Office exposes a copy-prompt CTA backed by its master prompt", () => {
+test("Material Office keeps prompt copying outside the dedicated preview", () => {
   assert.equal(existsSync(masterPrompt), true);
   const prompt = readFileSync(masterPrompt, "utf8");
   const content = readFileSync(source, "utf8");
@@ -76,9 +76,13 @@ test("Material Office exposes a copy-prompt CTA backed by its master prompt", ()
   assert.match(prompt, /material-office__canvas/);
   assert.match(prompt, /ENTRANCE_EASE/);
   assert.match(prompt, /@media \(min-width: 900px\)/);
-  assert.match(content, /Copy Prompt/);
-  assert.match(content, /navigator\.clipboard/);
-  assert.match(content, /material-office__prompt-copy/);
+  assert.doesNotMatch(prompt, /Copy Prompt/);
+  assert.doesNotMatch(prompt, /navigator\.clipboard/);
+  assert.doesNotMatch(prompt, /material-office__prompt-copy/);
+  assert.doesNotMatch(prompt, /MASTER_PROMPT_URL/);
+  assert.doesNotMatch(content, /Copy Prompt/);
+  assert.doesNotMatch(content, /navigator\.clipboard/);
+  assert.doesNotMatch(content, /material-office__prompt-copy/);
 });
 
 test("Material Office provides the full preview interaction contract", () => {
@@ -241,6 +245,9 @@ test("Library cards use Copy Prompt instead of source language", () => {
   const content = readFileSync(homepage, "utf8");
 
   assert.match(content, /Copy Prompt/);
+  assert.match(content, /master-prompt\.md/);
+  assert.match(content, /promptUrl/);
+  assert.match(content, /fetch\(asset\.promptUrl\)/);
   assert.doesNotMatch(content, /Get source/);
 });
 

@@ -33,6 +33,7 @@ type Asset = {
   previewImage?: string;
   previewUrl?: string;
   previewVideo?: string;
+  promptUrl?: string;
 };
 
 // Placeholder entries keep the catalog visible while the first real releases are being built.
@@ -50,6 +51,7 @@ const ASSETS: Asset[] = [
     previewImage: materialOfficeAsset.preview,
     previewVideo: materialOfficeAsset.previewVideo,
     previewUrl: materialOfficeAsset.route,
+    promptUrl: "/library/sections/material-office/master-prompt.md",
   },
   {
     id: 7,
@@ -205,12 +207,23 @@ export default function Home() {
     );
   }
 
-  function copyPrompt(asset: Asset) {
-    const prompt = `Create a ${asset.category.toLowerCase()} website inspired by ${asset.title}. Use a refined ${asset.stack} implementation with a premium, editorial visual direction.`;
+  async function copyPrompt(asset: Asset) {
+    try {
+      let prompt = `Create a ${asset.category.toLowerCase()} website inspired by ${asset.title}. Use a refined ${asset.stack} implementation with a premium, editorial visual direction.`;
 
-    void navigator.clipboard?.writeText(prompt);
-    setCopiedAssetId(asset.id);
-    window.setTimeout(() => setCopiedAssetId(null), 1800);
+      if (asset.promptUrl) {
+        const response = await fetch(asset.promptUrl);
+        if (!response.ok) throw new Error("Unable to load prompt");
+        prompt = await response.text();
+      }
+
+      if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
+      await navigator.clipboard.writeText(prompt);
+      setCopiedAssetId(asset.id);
+      window.setTimeout(() => setCopiedAssetId(null), 1800);
+    } catch {
+      setCopiedAssetId(null);
+    }
   }
 
   return (
