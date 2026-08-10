@@ -151,6 +151,12 @@ test("Selected Works detail titles reserve room for wrapped names", () => {
   assert.match(styles, /\.work-detail-title-field\s*\{[\s\S]*min-height:\s*clamp\(312px, 36vw, 560px\)/);
 });
 
+test("Selected Works detail text entrance does not clip glyphs", () => {
+  const source = readFileSync(sectionSource, "utf8");
+
+  assert.doesNotMatch(source, /clipPath/);
+});
+
 test("Selected Works does not render a section navbar", () => {
   const source = readFileSync(sectionSource, "utf8");
   const styles = readFileSync(sectionStyles, "utf8");

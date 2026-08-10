@@ -386,3 +386,12 @@ Per 2026-08-09:
 - Reason: Master prompt harus merekonstruksi section secara standalone tanpa membawa koneksi navigasi atau UI khusus Framefield.
 - Source of truth updated: kedua salinan `library/sections/material-office/master-prompt.md` dan `tests/material-office.test.mjs`.
 - Follow-up: Master prompt standalone tidak boleh membawa `Back to library`; implementasi host boleh menambahkan navigation wrapper di luar canonical section bila diperlukan.
+
+### 2026-08-11 — Selected Works detail text clipping removed
+
+- Type: Fixed | Changed
+- Area: UI | Motion | Documentation
+- Decision: Menghapus `clipPath` dari entrance animation child project detail Selected Works. First viewport text sekarang hanya memakai opacity dan translate, sehingga title seperti `Cinder Bureau.` tidak terpotong selama atau setelah stagger.
+- Reason: Clip reveal pada display typography dapat memotong bagian bawah glyph ketika viewport menangkap state transisi.
+- Source of truth updated: `library/sections/selected-works/source/SelectedWorks.tsx`, `library/sections/selected-works/design.md`, dan `tests/selected-works.test.mjs`.
+- Follow-up: Entrance animation untuk display text tidak boleh memakai clipping kecuali container dan glyph bounds sudah diverifikasi pada semua target viewport.

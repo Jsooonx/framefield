@@ -160,8 +160,8 @@ export function SelectedWorkDetail({
 
 function detailEnter(shouldReduceMotion: boolean | null, delay: number) {
   return {
-    initial: shouldReduceMotion ? false : { opacity: 0, y: 22, clipPath: "inset(0 0 20% 0)" },
-    animate: { opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" },
+    initial: shouldReduceMotion ? false : { opacity: 0, y: 22 },
+    animate: { opacity: 1, y: 0 },
     transition: { duration: 0.72, delay: shouldReduceMotion ? 0 : delay, ease: DETAIL_EASE },
   };
 }

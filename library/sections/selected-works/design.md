@@ -44,7 +44,7 @@
 - Detail gallery memakai zoom ringan; previous/next arrow hanya bergerak pada link terkait.
 - `Back to library` selalu tersedia sebagai glass pill fixed di kanan bawah, memakai kontrak visual Material Office hero (lingkaran panah kiri, blur, dan active scale). Pada detail page, `All projects` tetap menjadi navigasi kontekstual ke index template.
 - Selected Works tidak merender navbar; navigasi internal cukup memakai `All projects`, previous/next archive links, dan universal `Back to library`.
-- Detail entrance dipecah menjadi context, archive index, title, summary, lead image, metadata, story, gallery/build, dan navigation. Bagian first viewport memakai clip reveal yang tenang; bagian bawah memakai `whileInView` sekali dengan stagger 80–130ms.
+- Detail entrance dipecah menjadi context, archive index, title, summary, lead image, metadata, story, gallery/build, dan navigation. Bagian first viewport memakai opacity + translate yang tidak memotong glyph; bagian bawah memakai `whileInView` sekali dengan stagger 80–130ms.
 - Lead dan detail image masuk dari scale `1.04` ke `1`; reduced motion mematikan perpindahan dan tetap mempertahankan keterbacaan.
 - Reduced motion mematikan transform hover dan transition yang tidak esensial.
 
