@@ -119,7 +119,7 @@ Referensi hanya dipakai sebagai grammar layout. Tidak ada brand, copy, foto port
   - MP4 R2: `https://assets.framefield.my.id/sections/material-office/hero-video.mp4`
   - WebM: `/library/sections/material-office/hero-video.webm`
   - Catalog preview: `/library/sections/material-office/preview.webp`
-- **Master prompt:** `library/sections/material-office/master-prompt.md`, a standalone copy-paste prompt with no Framefield/platform dependency; the public mirror is used by the CTA at `/library/sections/material-office/master-prompt.md`.
+- **Master prompt:** `library/sections/material-office/master-prompt.md`, a standalone code-first rebuild prompt containing the canonical TSX/CSS structure and exact R2 asset URLs; the public mirror is used by the CTA at `/library/sections/material-office/master-prompt.md`.
 - **Catalog video:** `/library/sections/material-office/preview.mp4`, dimainkan muted dan looping di kartu katalog dengan `preview.webp` sebagai fallback image.
 - **Fallback behavior:** hero route memakai poster jika hero video tidak tersedia; catalog card memakai WebP jika catalog video gagal dimuat. Media slot tetap tidak mengubah DOM layout.
 - **Metadata:** `library/sections/material-office/metadata.ts`, status saat ini `review` karena menunggu visual/technical QA; asset sudah memiliki route, video, WebP, metadata, dan dokumentasi lengkap.
