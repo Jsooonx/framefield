@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none">
+  <defs><linearGradient id="night" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#080b19"/><stop offset="1" stop-color="#31245c"/></linearGradient><radialGradient id="orb"><stop stop-color="#80e8ff"/><stop offset="1" stop-color="#7654ff" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1200" height="900" fill="url(#night)"/>
+  <circle cx="830" cy="300" r="350" fill="url(#orb)" opacity=".82"/>
+  <g stroke="#9eecff" stroke-opacity=".65" stroke-width="2"><path d="M0 665C220 530 370 810 600 640s410-100 600-230"/><path d="M0 710C220 575 370 855 600 685s410-100 600-230"/><path d="M0 755C220 620 370 900 600 730s410-100 600-230"/></g>
+  <g fill="#eafcff"><circle cx="210" cy="210" r="4"/><circle cx="390" cy="500" r="5"/><circle cx="1000" cy="140" r="3"/></g>
+  <rect x="74" y="72" width="310" height="160" rx="18" stroke="#eafcff" stroke-opacity=".3"/>
+  <text x="108" y="132" fill="#eafcff" font-family="Arial, sans-serif" font-size="20" letter-spacing="5">SIGNAL HOUSE</text>
+  <text x="108" y="182" fill="#9eecff" font-family="Arial, sans-serif" font-size="16">SYSTEM / 04.26</text>
+</svg>

@@ -1,0 +1,43 @@
+# Dependencies and framework output
+node_modules/
+.next/
+.next-*/
+.next-build/
+out/
+coverage/
+*.tsbuildinfo
+
+# Local deployment and environment configuration
+.vercel/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Private project context and local agent tooling
+/AGENTS.md
+/.cairn.json
+/.agents/
+/.codex/
+/skills/
+/SKILL.md
+/obsidian_memory_vault/
+
+# Local-only artifacts
+tmp/
+temp/
+output/
+*.log
+*.local.*
+
+# Editor and operating-system files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.open-next/
+.wrangler/
+cloudflare-env.d.ts
+dev.vars
+public_backup/

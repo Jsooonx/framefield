@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none">
+  <defs><linearGradient id="violet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#16132f"/><stop offset="1" stop-color="#6f5bff"/></linearGradient></defs>
+  <rect width="1200" height="900" fill="url(#violet)"/>
+  <g stroke="#c4f5ff" stroke-width="2" opacity=".72"><path d="M600 90v720M240 450h720"/><circle cx="600" cy="450" r="230"/><circle cx="600" cy="450" r="125"/><path d="m600 220 70 230-70 230-70-230z"/></g>
+  <circle cx="600" cy="450" r="26" fill="#c4f5ff"/>
+  <g fill="#c4f5ff" font-family="Arial, sans-serif" font-size="18" letter-spacing="3"><text x="76" y="100">OBSERVATION 01</text><text x="900" y="820">SIGNAL / FORM</text></g>
+</svg>
