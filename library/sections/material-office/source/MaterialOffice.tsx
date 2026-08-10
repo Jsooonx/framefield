@@ -1,16 +1,17 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowLeft, ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Copy, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import "./material-office.css";
 
-const HERO_POSTER = "/library/sections/material-office/hero-poster.webp";
+const HERO_POSTER = "https://assets.framefield.my.id/sections/material-office/hero-poster.webp";
 const HERO_VIDEO = {
-  mp4: "/library/sections/material-office/hero-video.mp4",
+  mp4: "https://assets.framefield.my.id/sections/material-office/hero-video.mp4",
   webm: "/library/sections/material-office/hero-video.webm",
   available: true,
 };
+const MASTER_PROMPT_URL = "/library/sections/material-office/master-prompt.md";
 
 const MENU_ITEMS = ["Home", "Studio", "Projects", "Notes", "Contact"];
 const SERVICES = [
@@ -24,6 +25,7 @@ const ENTRANCE_EASE = [0.22, 1, 0.36, 1] as const;
 
 export function MaterialOffice() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [promptState, setPromptState] = useState<"idle" | "copying" | "copied" | "error">("idle");
   const prefersReducedMotion = useReducedMotion();
   const reduceMotion = prefersReducedMotion ?? false;
 
@@ -61,6 +63,27 @@ export function MaterialOffice() {
     }
   }
 
+  async function copyMasterPrompt() {
+    if (promptState === "copying") return;
+
+    setPromptState("copying");
+
+    try {
+      const response = await fetch(MASTER_PROMPT_URL);
+      if (!response.ok) throw new Error("Unable to load master prompt");
+
+      const prompt = await response.text();
+      if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
+
+      await navigator.clipboard.writeText(prompt);
+      setPromptState("copied");
+      window.setTimeout(() => setPromptState("idle"), 1800);
+    } catch {
+      setPromptState("error");
+      window.setTimeout(() => setPromptState("idle"), 2200);
+    }
+  }
+
   return (
     <main className="material-office" onKeyDown={handleKeyDown}>
       <section className="material-office__canvas" aria-label="Material Office hero preview">
@@ -76,8 +99,8 @@ export function MaterialOffice() {
               preload="metadata"
               poster={HERO_POSTER}
             >
-              <source src={HERO_VIDEO.webm} type="video/webm" />
-              <source src={HERO_VIDEO.mp4} type="video/mp4" />
+                  <source src={HERO_VIDEO.mp4} type="video/mp4" />
+                  <source src={HERO_VIDEO.webm} type="video/webm" />
             </video>
           )}
           <div className="material-office__shade" />
@@ -128,14 +151,25 @@ export function MaterialOffice() {
           A studio for brands with a physical point of view.
         </motion.p>
 
-        <motion.aside className="material-office__availability" aria-label="Availability" {...entrance(0.88, 12)}>
-          <span className="material-office__availability-signal" aria-hidden="true" />
-          <div>
-            <p>Now booking / Q4 2026</p>
-            <strong>Select collaborations</strong>
-          </div>
-          <ArrowUpRight size={17} aria-hidden="true" />
-        </motion.aside>
+        <motion.div className="material-office__actions" {...entrance(0.88, 12)}>
+          <button
+            className="material-office__prompt-copy"
+            type="button"
+            onClick={copyMasterPrompt}
+            disabled={promptState === "copying"}
+          >
+            <Copy size={15} strokeWidth={1.8} aria-hidden="true" />
+            {promptState === "copied" ? "Copied" : promptState === "error" ? "Try again" : "Copy Prompt"}
+          </button>
+          <aside className="material-office__availability" aria-label="Availability">
+            <span className="material-office__availability-signal" aria-hidden="true" />
+            <div>
+              <p>Now booking / Q4 2026</p>
+              <strong>Select collaborations</strong>
+            </div>
+            <ArrowUpRight size={17} aria-hidden="true" />
+          </aside>
+        </motion.div>
 
         <motion.a className="material-office__back" href="/#library" {...entrance(0.98, 8)}>
           <span className="material-office__back-icon" aria-hidden="true">

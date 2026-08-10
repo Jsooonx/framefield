@@ -43,6 +43,10 @@ const previewMp4 = new URL(
   import.meta.url,
 );
 const homepage = new URL("../src/app/page.tsx", import.meta.url);
+const masterPrompt = new URL(
+  "../library/sections/material-office/master-prompt.md",
+  import.meta.url,
+);
 
 test("Material Office has a dedicated section route", () => {
   assert.equal(existsSync(route), true);
@@ -55,6 +59,18 @@ test("Material Office metadata identifies the preview route", () => {
 
   assert.match(content, /slug:\s*"material-office"/);
   assert.match(content, /route:\s*"\/library\/sections\/material-office"/);
+});
+
+test("Material Office exposes a copy-prompt CTA backed by its master prompt", () => {
+  assert.equal(existsSync(masterPrompt), true);
+  const prompt = readFileSync(masterPrompt, "utf8");
+  const content = readFileSync(source, "utf8");
+
+  assert.match(prompt, /Material Office/i);
+  assert.match(prompt, /Back to library/);
+  assert.match(content, /Copy Prompt/);
+  assert.match(content, /navigator\.clipboard/);
+  assert.match(content, /material-office__prompt-copy/);
 });
 
 test("Material Office provides the full preview interaction contract", () => {
@@ -79,7 +95,7 @@ test("Material Office uses a reduced-motion-aware staggered hero entrance", () =
   assert.match(content, /motion\.header/);
   assert.match(content, /motion\.h1/);
   assert.match(content, /motion\.ul/);
-  assert.match(content, /motion\.aside/);
+  assert.match(content, /motion\.div/);
   assert.match(content, /motion\.a/);
   assert.match(content, /delay: reduceMotion \? 0 : delay/);
   assert.match(content, /0\.12/);
@@ -210,6 +226,13 @@ test("Material Office is a live catalog item with image and video previews", () 
   assert.match(content, /previewImage:\s*materialOfficeAsset\.preview/);
   assert.match(content, /previewVideo:\s*materialOfficeAsset\.previewVideo/);
   assert.match(content, /thumbnail-video/);
+});
+
+test("Library cards use Copy Prompt instead of source language", () => {
+  const content = readFileSync(homepage, "utf8");
+
+  assert.match(content, /Copy Prompt/);
+  assert.doesNotMatch(content, /Get source/);
 });
 
 test("Material Office video thumbnail removes the generic catalog circle", () => {

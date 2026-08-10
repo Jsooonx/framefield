@@ -6,7 +6,6 @@ import {
   ArrowUpRight,
   Bookmark,
   Check,
-  Code2,
   Copy,
   Menu,
   Search,
@@ -547,9 +546,7 @@ function AssetCard({
     : asset.thumbnail === "noon"
       ? "Make a quiet impact."
       : asset.title.split("—")[0];
-  const hasLivePreview = Boolean(asset.previewUrl && asset.previewVideo);
-
-  return (
+      return (
     <motion.article
       className="asset-card"
       initial="hidden"
@@ -642,7 +639,7 @@ function AssetCard({
           <button className="copy-action" disabled>
             Source soon
           </button>
-        ) : hasLivePreview ? null : asset.kind === "Prompt" ? (
+        ) : asset.kind === "Prompt" ? (
           <button className="copy-action" onClick={() => onCopyPrompt(asset)}>
             {isCopied ? (
               <>
@@ -650,13 +647,21 @@ function AssetCard({
               </>
             ) : (
               <>
-                <Copy size={14} /> Copy prompt
+                <Copy size={14} /> Copy Prompt
               </>
             )}
           </button>
         ) : (
-          <button className="copy-action">
-            <Code2 size={14} /> Get source
+          <button className="copy-action" onClick={() => onCopyPrompt(asset)}>
+            {isCopied ? (
+              <>
+                <Check size={14} /> Copied
+              </>
+            ) : (
+              <>
+                <Copy size={14} /> Copy Prompt
+              </>
+            )}
           </button>
         )}
       </div>

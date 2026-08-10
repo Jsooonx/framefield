@@ -350,3 +350,12 @@ Per 2026-08-09:
 - Reason: Menutup celah interpretasi bahwa elemen baru boleh tetap menjadi extension atau sub-brand Framefield.
 - Source of truth updated: `library/sections/selected-works/metadata.ts`, `library/sections/selected-works/source/SelectedWorks.tsx`, `tests/selected-works.test.mjs`, dan docs terkait.
 - Follow-up: Terapkan kontrak ini pada setiap package baru; `Homepage Pricing` dan `Pricing section` library tetap menjadi scope terpisah.
+
+### 2026-08-10 — Material Office prompt CTA and R2 media
+
+- Type: Added | Changed
+- Area: UI | Asset pipeline | Documentation
+- Decision: Mengganti CTA catalog `Get source` menjadi `Copy Prompt` dan menambahkan CTA yang sama pada dedicated Material Office preview. Master prompt disimpan di package elemen dan dipublikasikan sebagai markdown yang dapat disalin oleh browser. Hero MP4 1.81 MB di-upload ke R2 dan dijadikan source utama, dengan WebM lokal sebagai fallback format.
+- Reason: Elemen belum memiliki jalur prompt yang bisa langsung dipakai ulang, sementara source code belum menjadi delivery flow. R2 dipakai untuk media production tanpa memasukkan video besar ke runtime Worker.
+- Source of truth updated: `src/app/page.tsx`, `library/sections/material-office/source/MaterialOffice.tsx`, `library/sections/material-office/source/material-office.css`, `library/sections/material-office/master-prompt.md`, `public/library/sections/material-office/master-prompt.md`, `library/sections/material-office/design.md`, dan `docs/framefield-overview.md`.
+- Follow-up: Jika format master prompt berubah, sinkronkan file package dan file public sebelum deploy; setelah beberapa elemen tersedia, evaluasi ekstraksi CTA/prompt loader bersama.

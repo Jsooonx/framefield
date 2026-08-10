@@ -52,13 +52,14 @@ Komponen utama yang sudah ada:
 | Lichen Editorial color palette | Selesai | Palette aktif dipakai di `src/app/globals.css`. |
 | Framefield logo mark | Selesai | Asset berada di `public/framefield-mark.png`. |
 | Placeholder catalog | Selesai sementara | Catalog berisi placeholder entries agar bentuk katalog dapat diuji tanpa template final. |
-| Empty/placeholder states | Selesai | Card menampilkan `Coming soon`, `Preview soon`, dan `Source soon` sesuai status. |
+| Empty/placeholder states | Selesai | Card menampilkan `Coming soon` dan `Preview soon` sesuai status; source CTA sudah dikonversi menjadi `Copy Prompt`. |
 | CTA hover motion | Selesai | Semua CTA utama memakai per-letter rolling track dan contrast color swap. |
 | Dedicated route per element | Selesai (asset pertama) | Material Office tersedia di `/library/sections/material-office`. |
 | Asset package per element | Selesai (asset pertama) | Material Office memiliki references, design contract, source, metadata, dedicated route, poster fallback, dan catalog media di `library/sections/material-office/`. |
 | Full preview recording → WebP | Selesai (asset pertama) | Material Office memiliki `preview.webp` sebagai fallback katalog dan `preview.mp4` sebagai live catalog preview source. |
 | Selected Works template section | Selesai | Library memiliki satu asset card `Selected Works` yang membuka full preview section. |
 | Fictional case-study child routes | Selesai | Empat route project berada di bawah `/library/sections/selected-works/<slug>` dan static-generated saat build. |
+| Prompt copy flow | Selesai (asset pertama) | Catalog card dan dedicated Material Office preview menyediakan CTA `Copy Prompt`; prompt Material Office tersedia sebagai markdown package asset. |
 | Source delivery/download flow | Belum dimulai | Belum ada backend, auth, licensing, atau payment flow. |
 | CMS/admin input | Belum dimulai | Untuk fase awal, asset registry masih dikelola dari repository. |
 

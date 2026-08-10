@@ -4,7 +4,7 @@
 > Type: section
 > Slug: `material-office`
 > Owner: Framefield
-> Last updated: 2026-08-05
+> Last updated: 2026-08-10
 
 ## 1. Intent
 
@@ -50,6 +50,7 @@ Referensi hanya dipakai sebagai grammar layout. Tidak ada brand, copy, foto port
 - Control menu yang accessible: keyboard, focus state, Escape untuk close, dan scroll lock saat overlay terbuka.
 - Return control universal di kanan bawah: action `Back to library`.
 - Status `Available for select work` sebagai identitas UI pada availability card.
+- CTA `Copy Prompt` yang menyalin master prompt elemen dan menampilkan state `Copied` sementara.
 
 ## 4. Visual system
 
@@ -69,7 +70,7 @@ Referensi hanya dipakai sebagai grammar layout. Tidak ada brand, copy, foto port
 - **Availability card:** `Now booking / Q4 2026` dan `Select collaborations`.
 - **Menu:** `Home`, `Studio`, `Projects`, `Notes`, `Contact`.
 - **Utility:** `Jakarta / Global`, `hello@materialoffice.studio`, `Privacy`, `Terms`.
-- **CTA:** `Back to library` hanya berasal dari preview return control; hero tidak menambah sales CTA.
+- **CTA:** `Copy Prompt` adalah action utama elemen; `Back to library` tetap menjadi satu-satunya koneksi navigasi ke Framefield.
 - **Content that must not be invented:** testimonial, client logos, results metrics, awards, people, dan foto client.
 
 ## 6. Layout and responsive behavior
@@ -114,10 +115,11 @@ Referensi hanya dipakai sebagai grammar layout. Tidak ada brand, copy, foto port
 - **Styles:** `library/sections/material-office/source/material-office.css`
 - **Preview shell:** route-level wrapper dengan return control `Back to library` ke `/#library`.
 - **Media paths:**
-  - Poster: `/library/sections/material-office/hero-poster.webp`
-  - MP4: `/library/sections/material-office/hero-video.mp4`
+  - Poster R2: `https://assets.framefield.my.id/sections/material-office/hero-poster.webp`
+  - MP4 R2: `https://assets.framefield.my.id/sections/material-office/hero-video.mp4`
   - WebM: `/library/sections/material-office/hero-video.webm`
   - Catalog preview: `/library/sections/material-office/preview.webp`
+- **Master prompt:** `library/sections/material-office/master-prompt.md`, published for the CTA at `/library/sections/material-office/master-prompt.md`.
 - **Catalog video:** `/library/sections/material-office/preview.mp4`, dimainkan muted dan looping di kartu katalog dengan `preview.webp` sebagai fallback image.
 - **Fallback behavior:** hero route memakai poster jika hero video tidak tersedia; catalog card memakai WebP jika catalog video gagal dimuat. Media slot tetap tidak mengubah DOM layout.
 - **Metadata:** `library/sections/material-office/metadata.ts`, status saat ini `review` karena menunggu visual/technical QA; asset sudah memiliki route, video, WebP, metadata, dan dokumentasi lengkap.
@@ -138,6 +140,8 @@ Referensi hanya dipakai sebagai grammar layout. Tidak ada brand, copy, foto port
 [x] Video integrated after Google Flow export
 [x] Preview WebP recorded
 [x] Metadata registered in catalog
+[x] Copy Prompt CTA added to dedicated preview and catalog card
+[x] Hero MP4 uploaded to R2 and wired as primary source
 [x] Tests/build pass
 [x] Documentation audit updated
 ```

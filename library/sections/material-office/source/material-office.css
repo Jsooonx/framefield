@@ -55,6 +55,7 @@
 .material-office__hero,
 .material-office__services,
 .material-office__statement,
+.material-office__actions,
 .material-office__availability,
 .material-office__back {
   position: relative;
@@ -200,10 +201,47 @@
   text-wrap: pretty;
 }
 
-.material-office__availability {
+.material-office__actions {
   position: absolute;
   right: clamp(24px, 3.7vw, 56px);
   bottom: clamp(30px, 5vw, 64px);
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.material-office__prompt-copy {
+  display: inline-flex;
+  min-width: 132px;
+  gap: 9px;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 17px;
+  border: 1px solid rgba(243, 240, 231, 0.38);
+  border-radius: 15px;
+  color: #f3f0e7;
+  background: rgba(16, 18, 20, 0.5);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(14px);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  cursor: pointer;
+  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.material-office__prompt-copy:hover,
+.material-office__prompt-copy:focus-visible {
+  border-color: #f3f0e7;
+  color: #101214;
+  background: #f3f0e7;
+}
+
+.material-office__prompt-copy:active { transform: scale(0.98); }
+.material-office__prompt-copy:disabled { cursor: wait; opacity: 0.7; }
+
+.material-office__availability {
   display: grid;
   min-width: min(288px, calc(100% - 48px));
   grid-template-columns: auto 1fr auto;
@@ -431,7 +469,9 @@
   .material-office__hero h1 span { margin-left: 0.18em; }
   .material-office__services { position: relative; top: auto; right: auto; align-self: end; margin: 0 20px 168px; gap: 4px; }
   .material-office__statement { right: 20px; bottom: 88px; left: 20px; font-size: 16px; }
-  .material-office__availability { right: 20px; bottom: 18px; left: 20px; min-width: 0; }
+  .material-office__actions { right: 20px; bottom: 18px; left: 20px; gap: 8px; }
+  .material-office__prompt-copy { min-width: 0; padding: 15px 14px; }
+  .material-office__availability { min-width: 0; flex: 1; padding: 15px 14px; }
   .material-office__back { right: 20px; bottom: 128px; }
   .material-office__menu { padding: 18px 20px; }
   .material-office__menu-count { display: none; }
