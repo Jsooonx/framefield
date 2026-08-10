@@ -359,3 +359,12 @@ Per 2026-08-09:
 - Reason: Elemen belum memiliki jalur prompt yang bisa langsung dipakai ulang, sementara source code belum menjadi delivery flow. R2 dipakai untuk media production tanpa memasukkan video besar ke runtime Worker.
 - Source of truth updated: `src/app/page.tsx`, `library/sections/material-office/source/MaterialOffice.tsx`, `library/sections/material-office/source/material-office.css`, `library/sections/material-office/master-prompt.md`, `public/library/sections/material-office/master-prompt.md`, `library/sections/material-office/design.md`, dan `docs/framefield-overview.md`.
 - Follow-up: Jika format master prompt berubah, sinkronkan file package dan file public sebelum deploy; setelah beberapa elemen tersedia, evaluasi ekstraksi CTA/prompt loader bersama.
+
+### 2026-08-10 — Master prompt made standalone
+
+- Type: Changed
+- Area: Prompt product | Documentation
+- Decision: Mengganti isi master prompt Material Office dari dokumentasi internal package menjadi prompt rebuild standalone yang siap ditempel ke Lovable, Codex, atau AI coding agent lain. Prompt sekarang memakai attachment/local asset contract, visual source-of-truth, engineering constraints, motion rules, responsive targets, dan acceptance checklist tanpa menyebut Framefield, R2 internal, route library, atau `Back to library`.
+- Reason: Master prompt adalah deliverable yang dikonsumsi user lain; Framefield hanya menjadi tempat distribusi dan bukan dependency dari prompt.
+- Source of truth updated: `library/sections/material-office/master-prompt.md`, `public/library/sections/material-office/master-prompt.md`, `library/sections/material-office/design.md`, dan `tests/material-office.test.mjs`.
+- Follow-up: Master prompt elemen berikutnya wajib diperlakukan sebagai artefak standalone; detail katalog dan return control hanya dicatat di docs/implementation package, bukan di prompt yang disalin user.

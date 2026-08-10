@@ -67,7 +67,11 @@ test("Material Office exposes a copy-prompt CTA backed by its master prompt", ()
   const content = readFileSync(source, "utf8");
 
   assert.match(prompt, /Material Office/i);
-  assert.match(prompt, /Back to library/);
+  assert.match(prompt, /pixel|faithful|reproduction/i);
+  assert.doesNotMatch(prompt, /Framefield/i);
+  assert.doesNotMatch(prompt, /assets\.framefield\.my\.id/i);
+  assert.doesNotMatch(prompt, /\/library\//i);
+  assert.doesNotMatch(prompt, /Back to library/i);
   assert.match(content, /Copy Prompt/);
   assert.match(content, /navigator\.clipboard/);
   assert.match(content, /material-office__prompt-copy/);
