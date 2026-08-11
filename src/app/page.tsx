@@ -7,6 +7,7 @@ import {
   Bookmark,
   Check,
   Copy,
+  LoaderCircle,
   Menu,
   Search,
   Sparkles,
@@ -181,6 +182,7 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [savedAssetIds, setSavedAssetIds] = useState<number[]>([]);
+  const [copyingAssetId, setCopyingAssetId] = useState<number | null>(null);
   const [copiedAssetId, setCopiedAssetId] = useState<number | null>(null);
 
   const visibleAssets = useMemo(() => {
@@ -209,6 +211,10 @@ export default function Home() {
   }
 
   async function copyPrompt(asset: Asset) {
+    if (copyingAssetId !== null) return;
+
+    setCopyingAssetId(asset.id);
+
     try {
       let prompt = `Create a ${asset.category.toLowerCase()} website inspired by ${asset.title}. Use a refined ${asset.stack} implementation with a premium, editorial visual direction.`;
 
@@ -220,9 +226,12 @@ export default function Home() {
 
       if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
       await navigator.clipboard.writeText(prompt);
+      await new Promise((resolve) => window.setTimeout(resolve, 460));
+      setCopyingAssetId(null);
       setCopiedAssetId(asset.id);
       window.setTimeout(() => setCopiedAssetId(null), 1800);
     } catch {
+      setCopyingAssetId(null);
       setCopiedAssetId(null);
     }
   }
@@ -248,6 +257,7 @@ export default function Home() {
 
         <Library
           assets={visibleAssets}
+          copyingAssetId={copyingAssetId}
           copiedAssetId={copiedAssetId}
           filter={filter}
           query={query}
@@ -304,8 +314,6 @@ function Hero({ onBrowsePrompts, onScrollToLibrary }: HeroProps) {
       />
       <div className="hero-video-overlay" aria-hidden="true" />
       <div className="hero-noise" />
-      <div className="hero-arc hero-arc-one" />
-      <div className="hero-arc hero-arc-two" />
 
       <div className="hero-content">
         <motion.div
@@ -428,6 +436,7 @@ function Navigation({
 
 type LibraryProps = {
   assets: Asset[];
+  copyingAssetId: number | null;
   copiedAssetId: number | null;
   filter: AssetFilter;
   query: string;
@@ -440,6 +449,7 @@ type LibraryProps = {
 
 function Library({
   assets,
+  copyingAssetId,
   copiedAssetId,
   filter,
   query,
@@ -532,6 +542,7 @@ function Library({
             key={asset.id}
             asset={asset}
             index={index}
+            isCopying={copyingAssetId === asset.id}
             isCopied={copiedAssetId === asset.id}
             isSaved={savedAssetIds.includes(asset.id)}
             onCopyPrompt={onCopyPrompt}
@@ -553,6 +564,7 @@ function Library({
 type AssetCardProps = {
   asset: Asset;
   index: number;
+  isCopying: boolean;
   isCopied: boolean;
   isSaved: boolean;
   onCopyPrompt: (asset: Asset) => void;
@@ -562,6 +574,7 @@ type AssetCardProps = {
 function AssetCard({
   asset,
   index,
+  isCopying,
   isCopied,
   isSaved,
   onCopyPrompt,
@@ -665,29 +678,51 @@ function AssetCard({
           <button className="copy-action" disabled>
             Source soon
           </button>
-        ) : asset.kind === "Prompt" ? (
-          <button className="copy-action" onClick={() => onCopyPrompt(asset)}>
-            {isCopied ? (
-              <>
-                <Check size={14} /> Copied
-              </>
-            ) : (
-              <>
-                <Copy size={14} /> Copy Prompt
-              </>
-            )}
-          </button>
         ) : (
-          <button className="copy-action" onClick={() => onCopyPrompt(asset)}>
-            {isCopied ? (
-              <>
-                <Check size={14} /> Copied
-              </>
-            ) : (
-              <>
-                <Copy size={14} /> Copy Prompt
-              </>
-            )}
+          <button
+            className="copy-action"
+            disabled={isCopying}
+            aria-busy={isCopying}
+            aria-live="polite"
+            onClick={() => onCopyPrompt(asset)}
+          >
+            <AnimatePresence initial={false} mode="wait">
+              {isCopying ? (
+                <motion.span
+                  key="copying"
+                  className="copy-action-state"
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.16, ease: EASE_OUT }}
+                >
+                  <LoaderCircle size={14} className="copy-action-spinner" />
+                  Copying
+                </motion.span>
+              ) : isCopied ? (
+                <motion.span
+                  key="copied"
+                  className="copy-action-state"
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.16, ease: EASE_OUT }}
+                >
+                  <Check size={14} /> Copied!
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="idle"
+                  className="copy-action-state"
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.16, ease: EASE_OUT }}
+                >
+                  <Copy size={14} /> Copy Prompt
+                </motion.span>
+              )}
+            </AnimatePresence>
           </button>
         )}
       </div>

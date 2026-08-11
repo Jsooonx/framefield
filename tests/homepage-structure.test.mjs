@@ -26,6 +26,17 @@ test("homepage keeps the library controls available", () => {
   assert.match(page, /previewVideo/);
 });
 
+test("copy prompt uses a loading morph before the copied state", () => {
+  assert.match(page, /copyingAssetId/);
+  assert.match(page, /isCopying={copyingAssetId === asset\.id}/);
+  assert.match(page, /disabled={isCopying}/);
+  assert.match(page, /<AnimatePresence initial={false} mode="wait">/);
+  assert.match(page, /LoaderCircle/);
+  assert.match(page, /className="copy-action-spinner"/);
+  assert.match(styles, /\.copy-action-state\s*\{/);
+  assert.match(styles, /\.copy-action-spinner\s*\{/);
+});
+
 test("homepage uses the Framefield frame system", () => {
   assert.match(page, /function FrameDetails/);
   assert.match(page, /function SectionSeparator/);
@@ -42,6 +53,11 @@ test("hero uses the ambient background video inside the framed canvas", () => {
   assert.match(page, /muted/);
   assert.match(styles, /\.hero-video\s*\{[\s\S]*object-fit:\s*cover/);
   assert.match(styles, /\.hero-video-overlay\s*\{[\s\S]*pointer-events:\s*none/);
+});
+
+test("hero does not render the retired arc decorations", () => {
+  assert.doesNotMatch(page, /hero-arc/);
+  assert.doesNotMatch(styles, /\.hero-arc/);
 });
 
 test("navbar follows the framed Precode composition", () => {
