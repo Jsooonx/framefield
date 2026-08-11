@@ -41,6 +41,12 @@ test("Selected Works catalog entry uses the named preview video", () => {
   assert.equal(existsSync(new URL("../public/library/sections/selected-works/preview.mp4", import.meta.url)), true);
 });
 
+test("Selected Works video thumbnail removes the generic catalog circle", () => {
+  const stylesheet = readFileSync(new URL("../src/app/globals.css", import.meta.url), "utf8");
+
+  assert.match(stylesheet, /\.thumbnail\.selected-works::after\s*\{\s*display:\s*none;/);
+});
+
 test("Selected Works is the second catalog item", () => {
   const page = readFileSync(homepage, "utf8");
   const selectedIndex = page.indexOf("title: selectedWorksAsset.title");

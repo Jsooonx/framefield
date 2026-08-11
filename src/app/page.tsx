@@ -291,6 +291,18 @@ function Hero({ onBrowsePrompts, onScrollToLibrary }: HeroProps) {
   return (
     <section className="hero-shell editorial-frame" id="top">
       <FrameDetails />
+      <video
+        className="hero-video"
+        src="/library/hero/framefield-hero-ambient.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
+        tabIndex={-1}
+      />
+      <div className="hero-video-overlay" aria-hidden="true" />
       <div className="hero-noise" />
       <div className="hero-arc hero-arc-one" />
       <div className="hero-arc hero-arc-two" />

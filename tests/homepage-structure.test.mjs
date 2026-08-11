@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 
 const page = readFileSync(new URL("../src/app/page.tsx", import.meta.url), "utf8");
@@ -7,6 +7,7 @@ const styles = readFileSync(
   new URL("../src/app/globals.css", import.meta.url),
   "utf8",
 );
+const heroVideo = new URL("../public/library/hero/framefield-hero-ambient.mp4", import.meta.url);
 
 test("homepage contains the editorial narrative anchors", () => {
   for (const anchor of ["#top", "#library", "#pricing", "#footer"]) {
@@ -30,6 +31,17 @@ test("homepage uses the Framefield frame system", () => {
   assert.match(page, /function SectionSeparator/);
   assert.match(page, /className="framefield-site"/);
   assert.match(page, /className="stripe-separator"/);
+});
+
+test("hero uses the ambient background video inside the framed canvas", () => {
+  assert.equal(existsSync(heroVideo), true);
+  assert.match(page, /className="hero-video"/);
+  assert.match(page, /src="\/library\/hero\/framefield-hero-ambient\.mp4"/);
+  assert.match(page, /autoPlay/);
+  assert.match(page, /loop/);
+  assert.match(page, /muted/);
+  assert.match(styles, /\.hero-video\s*\{[\s\S]*object-fit:\s*cover/);
+  assert.match(styles, /\.hero-video-overlay\s*\{[\s\S]*pointer-events:\s*none/);
 });
 
 test("navbar follows the framed Precode composition", () => {

@@ -116,10 +116,35 @@ a {
     0 0 0 1px rgba(255, 255, 255, 0.08),
     0 22px 70px rgba(0, 0, 0, 0.32);
 }
+.hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.76;
+  filter: saturate(0.88) contrast(1.04);
+  pointer-events: none;
+}
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(10, 12, 14, 0.6) 0%, rgba(10, 12, 14, 0.22) 58%, rgba(10, 12, 14, 0.42) 100%),
+    linear-gradient(180deg, rgba(10, 12, 14, 0.08), rgba(10, 12, 14, 0.38)),
+    linear-gradient(rgba(243, 240, 231, 0.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243, 240, 231, 0.026) 1px, transparent 1px);
+  background-size: auto, auto, 32px 32px, 32px 32px;
+}
 .hero-noise {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 2;
   opacity: 0.28;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E");
   mix-blend-mode: soft-light;
@@ -129,7 +154,7 @@ a {
   position: absolute;
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 999px;
-  z-index: -1;
+  z-index: 2;
 }
 .hero-arc-one {
   width: 720px;
@@ -263,6 +288,7 @@ a {
   margin: 200px auto 0;
   position: relative;
   text-align: center;
+  z-index: 3;
 }
 .eyebrow,
 .section-kicker {
@@ -436,7 +462,7 @@ a {
   position: absolute;
   bottom: 0;
   left: 50%;
-  z-index: 1;
+  z-index: 3;
   transform: translateX(-50%);
   height: 39px;
   padding: 0 17px;
@@ -450,6 +476,11 @@ a {
   font-size: 9px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    display: none;
+  }
 }
 /* Library: browsing controls and the preview-card catalog. */
 .library-section,
@@ -703,6 +734,9 @@ a {
   border-radius: 50%;
 }
 .thumbnail.material-office::after {
+  display: none;
+}
+.thumbnail.selected-works::after {
   display: none;
 }
 .thumbnail.aster:after {
