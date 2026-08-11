@@ -28,8 +28,17 @@ test("Library catalogs only the Selected Works section template", () => {
 
   assert.match(page, /selectedWorksAsset/);
   assert.match(page, /previewUrl:\s*selectedWorksAsset\.route/);
+  assert.match(page, /previewVideo:\s*selectedWorksAsset\.previewVideo/);
   assert.doesNotMatch(page, /SELECTED_WORKS\.map/);
   assert.doesNotMatch(page, /\/works\//);
+});
+
+test("Selected Works catalog entry uses the named preview video", () => {
+  const content = readFileSync(metadata, "utf8");
+
+  assert.match(content, /title:\s*"4 Selected Works \(1\)"/);
+  assert.match(content, /previewVideo:\s*"\/library\/sections\/selected-works\/preview\.mp4"/);
+  assert.equal(existsSync(new URL("../public/library/sections/selected-works/preview.mp4", import.meta.url)), true);
 });
 
 test("Selected Works is the second catalog item", () => {

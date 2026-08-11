@@ -2,7 +2,7 @@
 
 ## Intent
 
-`Selected Works` adalah satu template section portfolio. Ia merender index empat project dan menyediakan halaman detail untuk tiap project di dalam route section yang sama. Empat project adalah konten demonstratif, bukan empat template terpisah dan bukan client work.
+`4 Selected Works (1)` adalah satu template section portfolio. Ia merender index empat project dan menyediakan halaman detail untuk tiap project di dalam route section yang sama. Empat project adalah konten demonstratif, bukan empat template terpisah dan bukan client work.
 
 ## Reference
 
@@ -11,7 +11,7 @@
 
 ## Rebrand direction
 
-- Preview adalah project index editorial terang tanpa navbar section: masthead `Projects.` dengan `©2026`, penanda `(04)`, lalu grid empat project dua kolom. Pada desktop, `(04)` duduk rendah di kiri, `Projects.` mengunci area tengah-kiri, dan `©2026` berdiri terpisah di kanan bawah supaya komposisinya tidak mengikuti title/year stack referensi. Di mobile, masthead runtuh menjadi satu kolom. Navbar hanya menjadi bagian dari Hero.
+- Preview adalah project index editorial terang tanpa navbar section: masthead `Projects.` dengan `©2026`, penanda `(04)`, lalu grid empat project dua kolom. Pada desktop, `(04)` duduk rendah di kiri, `Projects.` mengunci area tengah-kiri, dan `©2026` berdiri terpisah di kanan bawah supaya komposisinya tidak mengikuti title/year stack referensi. Di mobile, masthead runtuh menjadi satu kolom. Navbar hanya menjadi bagian dari Hero. Entry katalog memakai preview video `public/library/sections/selected-works/preview.mp4`.
 - Pada desktop 1440×900, title rail dan awal visual pertama harus sudah masuk first viewport. Pada mobile 390×844, grid berubah menjadi satu kolom tanpa horizontal overflow.
 - Setiap project memakai title rail putih tipis di atas visual; hover hanya memperkuat veil, zoom media sedikit, dan mengangkat lockup pada card terkait. Rail dan seluruh row tidak ikut berubah.
 - Surface memakai off-white, tipografi hampir hitam, outline media hitam transparan, dan radius hanya untuk menyatukan rail dengan media. Tidak ada identitas atau copy dari referensi.
@@ -50,7 +50,7 @@
 
 ## Definition of done
 
-- Satu asset catalog entry `Selected Works` membuka preview section.
+- Satu asset catalog entry `4 Selected Works (1)` membuka preview section.
 - Empat project muncul di preview dan setiap project membuka nested child route.
 - Delapan visual WebP berada di `public/library/sections/selected-works/` dan seluruh metadata aktif mengarah ke aset tersebut.
 - References, metadata, source, CSS, route, test, dan docs tersedia.

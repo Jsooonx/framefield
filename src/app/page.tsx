@@ -64,6 +64,7 @@ const ASSETS: Asset[] = [
     accent: "moss",
     thumbnail: "selected-works",
     previewImage: selectedWorksAsset.preview,
+    previewVideo: selectedWorksAsset.previewVideo,
     previewUrl: selectedWorksAsset.route,
   },
   {

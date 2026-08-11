@@ -20,13 +20,14 @@ const sectionRoute = "/library/sections/selected-works";
 
 export const selectedWorksAsset = {
   slug: "selected-works",
-  title: "Selected Works",
+  title: "4 Selected Works (1)",
   type: "section" as const,
   category: "Works",
   status: "review" as const,
   access: "Free" as const,
   tags: ["portfolio", "editorial", "case-study"],
   preview: "/library/sections/selected-works/cinder-bureau/visual-01.webp",
+  previewVideo: "/library/sections/selected-works/preview.mp4",
   sourceAvailable: true,
   route: sectionRoute,
 };
