@@ -2,22 +2,38 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 
-const metadata = new URL("../library/sections/selected-works/metadata.ts", import.meta.url);
-const sectionSource = new URL("../library/sections/selected-works/source/SelectedWorks.tsx", import.meta.url);
-const sectionStyles = new URL("../library/sections/selected-works/source/selected-works.css", import.meta.url);
-const sectionRoute = new URL("../src/app/library/sections/selected-works/page.tsx", import.meta.url);
-const detailRoute = new URL("../src/app/library/sections/selected-works/[slug]/page.tsx", import.meta.url);
+const packageRoot = new URL("../library/sections/4-selected-works-1/", import.meta.url);
+const oldPackageRoot = new URL("../library/sections/selected-works/", import.meta.url);
+const metadata = new URL("../library/sections/4-selected-works-1/metadata.ts", import.meta.url);
+const sectionSource = new URL("../library/sections/4-selected-works-1/source/SelectedWorks.tsx", import.meta.url);
+const previewSource = new URL("../library/sections/4-selected-works-1/source/SelectedWorksPreview.tsx", import.meta.url);
+const detailSource = new URL("../library/sections/4-selected-works-1/source/SelectedWorkDetail.tsx", import.meta.url);
+const motionSource = new URL("../library/sections/4-selected-works-1/source/selected-works-motion.ts", import.meta.url);
+const sectionStyles = new URL("../library/sections/4-selected-works-1/source/selected-works.css", import.meta.url);
+const sectionRoute = new URL("../src/app/library/sections/4-selected-works-1/page.tsx", import.meta.url);
+const detailRoute = new URL("../src/app/library/sections/4-selected-works-1/[slug]/page.tsx", import.meta.url);
+const publicAssets = new URL("../public/library/sections/4-selected-works-1/", import.meta.url);
+const masterPrompt = new URL("../library/sections/4-selected-works-1/master-prompt.md", import.meta.url);
+const publicMasterPrompt = new URL("../public/library/sections/4-selected-works-1/master-prompt.md", import.meta.url);
+
+function readPackageSource() {
+  return [sectionSource, previewSource, detailSource, motionSource]
+    .map((file) => readFileSync(file, "utf8"))
+    .join("\n");
+}
 const homepage = new URL("../src/app/page.tsx", import.meta.url);
 const legacyRoute = new URL("../src/app/works/[slug]/page.tsx", import.meta.url);
 
 test("Selected Works is one section package with four child projects", () => {
+  assert.equal(existsSync(packageRoot), true);
+  assert.equal(existsSync(oldPackageRoot), false);
   assert.equal(existsSync(metadata), true);
   const content = readFileSync(metadata, "utf8");
 
   assert.match(content, /selectedWorksAsset/);
   assert.match(content, /type:\s*"section"/);
   assert.match(content, /category:\s*"Works"/);
-  assert.match(content, /const sectionRoute = "\/library\/sections\/selected-works"/);
+  assert.match(content, /const sectionRoute = "\/library\/sections\/4-selected-works-1"/);
   assert.match(content, /route:\s*sectionRoute/);
   assert.match(content, /SELECTED_WORKS/);
   assert.equal((content.match(/^    slug:/gm) ?? []).length, 4);
@@ -29,6 +45,7 @@ test("Library catalogs only the Selected Works section template", () => {
   assert.match(page, /selectedWorksAsset/);
   assert.match(page, /previewUrl:\s*selectedWorksAsset\.route/);
   assert.match(page, /previewVideo:\s*selectedWorksAsset\.previewVideo/);
+  assert.match(page, /4-selected-works-1/);
   assert.doesNotMatch(page, /SELECTED_WORKS\.map/);
   assert.doesNotMatch(page, /\/works\//);
 });
@@ -37,8 +54,9 @@ test("Selected Works catalog entry uses the named preview video", () => {
   const content = readFileSync(metadata, "utf8");
 
   assert.match(content, /title:\s*"4 Selected Works \(1\)"/);
-  assert.match(content, /previewVideo:\s*"\/library\/sections\/selected-works\/preview\.mp4"/);
-  assert.equal(existsSync(new URL("../public/library/sections/selected-works/preview.mp4", import.meta.url)), true);
+  assert.match(content, /previewVideo:\s*"\/library\/sections\/4-selected-works-1\/preview\.mp4"/);
+  assert.match(content, /promptUrl:\s*"\/library\/sections\/4-selected-works-1\/master-prompt\.md"/);
+  assert.equal(existsSync(new URL("../public/library/sections/4-selected-works-1/preview.mp4", import.meta.url)), true);
 });
 
 test("Selected Works video thumbnail removes the generic catalog circle", () => {
@@ -64,7 +82,7 @@ test("Selected Works preview and details use nested section routes", () => {
 
   const preview = readFileSync(sectionRoute, "utf8");
   const detail = readFileSync(detailRoute, "utf8");
-  const source = readFileSync(sectionSource, "utf8");
+  const source = readPackageSource();
 
   assert.match(preview, /SelectedWorks/);
   assert.match(detail, /generateStaticParams/);
@@ -85,15 +103,45 @@ test("Selected Works uses fresh case studies with raster visual paths", () => {
   assert.doesNotMatch(content, /selected-works\/.+\.svg/);
 
   for (const slug of slugs) {
-    assert.equal(existsSync(new URL(`../public/library/sections/selected-works/${slug}/visual-01.webp`, import.meta.url)), true);
-    assert.equal(existsSync(new URL(`../public/library/sections/selected-works/${slug}/visual-02.webp`, import.meta.url)), true);
+    assert.equal(existsSync(new URL(`../public/library/sections/4-selected-works-1/${slug}/visual-01.webp`, import.meta.url)), true);
+    assert.equal(existsSync(new URL(`../public/library/sections/4-selected-works-1/${slug}/visual-02.webp`, import.meta.url)), true);
   }
+});
+
+test("Selected Works package removes orphan studies and keeps the source split", () => {
+  assert.equal(existsSync(previewSource), true);
+  assert.equal(existsSync(detailSource), true);
+  assert.equal(existsSync(motionSource), true);
+
+  for (const folder of ["material-office", "quiet-form", "ritual-objects", "signal-house"]) {
+    assert.equal(existsSync(new URL(`../public/library/sections/4-selected-works-1/${folder}/`, import.meta.url)), false);
+  }
+});
+
+test("Selected Works ships a standalone code-first master prompt", () => {
+  assert.equal(existsSync(masterPrompt), true);
+  assert.equal(existsSync(publicMasterPrompt), true);
+
+  const prompt = readFileSync(masterPrompt, "utf8");
+  const publicPrompt = readFileSync(publicMasterPrompt, "utf8");
+
+  assert.equal(prompt, publicPrompt);
+  assert.match(prompt, /4-selected-works-1/);
+  assert.match(prompt, /motion\/react/);
+  assert.match(prompt, /lucide-react/);
+  for (const slug of ["cinder-bureau", "auralis", "stillhouse", "vela-objects"]) {
+    assert.match(prompt, new RegExp(slug));
+    assert.match(prompt, new RegExp(`sections\\/4-selected-works-1\\/${slug}\\/visual-0[12]\\.webp`));
+  }
+  assert.match(prompt, /Standalone integration exclusions/);
+  assert.doesNotMatch(prompt, /Copy Prompt/);
+  assert.doesNotMatch(prompt, /Back to library/);
 });
 
 test("Selected Works interactions remain scoped to the section implementation", () => {
   assert.equal(existsSync(sectionSource), true);
   assert.equal(existsSync(sectionStyles), true);
-  const source = readFileSync(sectionSource, "utf8");
+  const source = readPackageSource();
   const styles = readFileSync(sectionStyles, "utf8");
 
   assert.match(source, /selected-work-card/);
@@ -104,7 +152,7 @@ test("Selected Works interactions remain scoped to the section implementation", 
 });
 
 test("Selected Works preview uses the approved editorial project-index composition", () => {
-  const source = readFileSync(sectionSource, "utf8");
+  const source = readPackageSource();
   const styles = readFileSync(sectionStyles, "utf8");
 
   assert.match(source, /Projects\./);
@@ -116,7 +164,7 @@ test("Selected Works preview uses the approved editorial project-index compositi
 });
 
 test("Selected Works uses the universal hero-style library back control", () => {
-  const source = readFileSync(sectionSource, "utf8");
+  const source = readPackageSource();
   const styles = readFileSync(sectionStyles, "utf8");
 
   assert.match(source, /selected-works-library-back-icon/);
@@ -126,7 +174,7 @@ test("Selected Works uses the universal hero-style library back control", () => 
 });
 
 test("Selected Works content is independent from Framefield branding", () => {
-  const source = readFileSync(sectionSource, "utf8");
+  const source = readPackageSource();
   const content = readFileSync(metadata, "utf8");
 
   assert.match(source, /Back to library/);
@@ -136,7 +184,7 @@ test("Selected Works content is independent from Framefield branding", () => {
 });
 
 test("Selected Works details use the art-directed archive composition and staged motion", () => {
-  const source = readFileSync(sectionSource, "utf8");
+  const source = readPackageSource();
   const styles = readFileSync(sectionStyles, "utf8");
 
   for (const hook of [
@@ -167,7 +215,7 @@ test("Selected Works detail titles reserve room for wrapped names", () => {
 });
 
 test("Selected Works detail text entrance does not clip glyphs", () => {
-  const source = readFileSync(sectionSource, "utf8");
+  const source = readPackageSource();
 
   assert.doesNotMatch(source, /clipPath/);
 });

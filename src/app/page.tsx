@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { materialOfficeAsset } from "../../library/sections/material-office/metadata";
-import { selectedWorksAsset } from "../../library/sections/selected-works/metadata";
+import { selectedWorksAsset } from "../../library/sections/4-selected-works-1/metadata";
 
 type AssetKind = "Visual" | "Prompt" | "Section";
 type AssetFilter = "All" | "Visuals" | "Prompts" | "Sections";
@@ -67,6 +67,7 @@ const ASSETS: Asset[] = [
     previewImage: selectedWorksAsset.preview,
     previewVideo: selectedWorksAsset.previewVideo,
     previewUrl: selectedWorksAsset.route,
+    promptUrl: selectedWorksAsset.promptUrl,
   },
   {
     id: 1,

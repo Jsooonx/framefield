@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import { SELECTED_WORKS, getSelectedWork } from "../../../../../../library/sections/selected-works/metadata";
-import { SelectedWorkDetail } from "../../../../../../library/sections/selected-works/source/SelectedWorks";
+import { SELECTED_WORKS, getSelectedWork } from "../../../../../../library/sections/4-selected-works-1/metadata";
+import { SelectedWorkDetail } from "../../../../../../library/sections/4-selected-works-1/source/SelectedWorks";
 
 export function generateStaticParams() {
   return SELECTED_WORKS.map((work) => ({ slug: work.slug }));

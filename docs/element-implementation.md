@@ -34,9 +34,9 @@ Framefield mengenal empat tipe asset:
 
 ## 1A. Selected Works / fictional case studies
 
-Selected Works adalah satu template section portfolio dengan empat project fictional sebagai child page, bukan empat asset catalog terpisah. Metadata dan project registry hidup di `library/sections/selected-works/metadata.ts`; preview route berada di `src/app/library/sections/selected-works/page.tsx`; visual study lokal berada di `public/library/sections/selected-works/<slug>/`.
+`4 Selected Works (1)` adalah satu template section portfolio dengan empat project fictional sebagai child page, bukan empat asset catalog terpisah. Metadata dan project registry hidup di `library/sections/4-selected-works-1/metadata.ts`; preview route berada di `src/app/library/sections/4-selected-works-1/page.tsx`; visual study lokal berada di `public/library/sections/4-selected-works-1/<slug>/`. Folder dan R2 prefix memakai nama URL-safe `4-selected-works-1`, sementara title yang tampil tetap `4 Selected Works (1)`.
 
-Setiap work memiliki child detail page di `/library/sections/selected-works/<slug>` yang memuat brief, direction, stack, visual study, komponen yang dipakai oleh package, serta link previous/next. Label `Fictional case study` wajib dipertahankan agar showcase tidak disalahpahami sebagai client work.
+Setiap work memiliki child detail page di `/library/sections/4-selected-works-1/<slug>` yang memuat brief, direction, stack, visual study, komponen yang dipakai oleh package, serta link previous/next. Label `Fictional case study` wajib dipertahankan agar showcase tidak disalahpahami sebagai client work.
 
 ## 2. Struktur asset package
 
@@ -71,7 +71,7 @@ Source, references, design contract, dan metadata hidup di package `library/`. F
 - `design.md` — design contract dan keputusan yang disetujui sebelum coding.
 - `references/` — screenshot, image reference, atau material visual yang menjadi dasar pembahasan.
 - `source/` — implementation asset yang benar-benar dirender oleh full preview route.
-- `public/library/sections/<slug>/preview.webp` — file ringan yang ditampilkan sebagai fallback/kartu katalog.
+- `public/library/sections/<slug>/preview.webp` — pola file ringan yang umum dipakai sebagai fallback/kartu katalog; implementasi dapat memakai file image lain selama `metadata.preview` menunjuk ke fallback yang benar.
 - `public/library/sections/<slug>/preview.mp4` — optional video recording untuk kartu katalog yang mendukung live preview.
 - `metadata.ts` — informasi yang dibutuhkan registry/katalog: slug, title, type, tags, status, preview path, dan source availability.
 
@@ -113,9 +113,9 @@ export const asset = {
   type: "section",
   category: "Hero",
   status: "draft",
-  access: "free",
+  access: "Free",
   tags: ["editorial", "hero", "dark"],
-  preview: "/library/sections/hero-editorial/preview.webp",
+  preview: "/library/sections/hero-editorial/preview.webp", // required catalog fallback image; filename may differ
   previewVideo: "/library/sections/hero-editorial/preview.mp4", // optional
   sourceAvailable: true,
 };
@@ -125,10 +125,12 @@ Nilai `status` yang dipakai:
 
 - `draft` — sedang dibangun dan belum masuk katalog publik.
 - `review` — implementation sudah ada, menunggu visual/technical QA.
-- `published` — full preview, WebP, metadata, dan dokumentasi sudah lengkap.
+- `published` — full preview, catalog fallback image, metadata, dan dokumentasi sudah lengkap.
 - `archived` — tidak ditampilkan di katalog aktif, tetapi source dan sejarahnya dipertahankan.
 
 Jangan menambahkan field baru ke setiap `metadata.ts` tanpa memperbarui kontrak registry dan dokumentasi audit.
+
+`sourceAvailable: true` berarti implementation dan/atau standalone prompt tersedia di repository. Ini tidak berarti source sudah dapat diunduh user dan tidak mencakup licensing, authentication, payment, atau delivery backend. Nilai `access` yang valid adalah `Free` atau `Premium`.
 
 ## 5. Design contract sebelum implementasi
 
@@ -153,7 +155,7 @@ Setelah implementation stabil:
 1. Buka dedicated route.
 2. Pilih viewport target dan scroll sequence.
 3. Record visual tanpa browser chrome.
-4. Export `preview.webp` dengan ukuran yang cukup untuk kartu katalog.
+4. Export catalog fallback image dengan ukuran yang cukup untuk kartu katalog; `preview.webp` adalah konvensi umum, bukan nama file wajib jika `metadata.preview` menunjuk ke image lain.
 5. Jika kartu memakai live preview, simpan recording sebagai `preview.mp4` di folder publik asset.
 6. Hubungkan `preview` dan optional `previewVideo` di `metadata.ts`.
 7. Buka kartu katalog dan pastikan preview click-through ke full route.
@@ -167,10 +169,10 @@ Satu asset dapat disebut `published` jika:
 - `design.md` lengkap dan sesuai dengan implementation.
 - Semua reference file tersimpan di folder asset.
 - Dedicated full preview route bisa dibuka langsung.
-- Jika asset berupa Selected Works, satu route preview `/library/sections/selected-works` dan seluruh child route project harus tersedia dari package yang sama.
+- Jika asset berupa `4 Selected Works (1)`, satu route preview `/library/sections/4-selected-works-1` dan seluruh child route project harus tersedia dari package yang sama.
 - Mobile dan desktop preview sudah dicek.
 - Universal `Back to library` tersedia sebagai satu-satunya koneksi ke Framefield.
-- `preview.webp` tersedia dan tidak rusak.
+- `metadata.preview` menunjuk ke catalog fallback image yang tersedia dan tidak rusak.
 - Metadata terdaftar di registry.
 - Source availability dan access state jelas.
 - Test/build lulus.

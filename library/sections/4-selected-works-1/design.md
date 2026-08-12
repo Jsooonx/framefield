@@ -1,8 +1,18 @@
-# Selected Works — Design Contract
+# 4 Selected Works (1) — Design Contract
 
 ## Intent
 
 `4 Selected Works (1)` adalah satu template section portfolio. Ia merender index empat project dan menyediakan halaman detail untuk tiap project di dalam route section yang sama. Empat project adalah konten demonstratif, bukan empat template terpisah dan bukan client work.
+
+## Naming and package contract
+
+- User-facing title: `4 Selected Works (1)`.
+- URL-safe package folder: `library/sections/4-selected-works-1/`.
+- URL-safe public/R2 prefix: `sections/4-selected-works-1/`.
+- Full preview route: `/library/sections/4-selected-works-1`.
+- Child routes retain the project slugs `cinder-bureau`, `auralis`, `stillhouse`, and `vela-objects`.
+- Source is split into `SelectedWorksPreview.tsx`, `SelectedWorkDetail.tsx`, `selected-works-motion.ts`, and the barrel `SelectedWorks.tsx`.
+- `master-prompt.md` is the standalone code-first rebuild artifact, with a public copy served from the same package path.
 
 ## Reference
 
@@ -11,7 +21,7 @@
 
 ## Rebrand direction
 
-- Preview adalah project index editorial terang tanpa navbar section: masthead `Projects.` dengan `©2026`, penanda `(04)`, lalu grid empat project dua kolom. Pada desktop, `(04)` duduk rendah di kiri, `Projects.` mengunci area tengah-kiri, dan `©2026` berdiri terpisah di kanan bawah supaya komposisinya tidak mengikuti title/year stack referensi. Di mobile, masthead runtuh menjadi satu kolom. Navbar hanya menjadi bagian dari Hero. Entry katalog memakai preview video `public/library/sections/selected-works/preview.mp4`.
+- Preview adalah project index editorial terang tanpa navbar section: masthead `Projects.` dengan `©2026`, penanda `(04)`, lalu grid empat project dua kolom. Pada desktop, `(04)` duduk rendah di kiri, `Projects.` mengunci area tengah-kiri, dan `©2026` berdiri terpisah di kanan bawah supaya komposisinya tidak mengikuti title/year stack referensi. Di mobile, masthead runtuh menjadi satu kolom. Navbar hanya menjadi bagian dari Hero. Entry katalog memakai preview video `public/library/sections/4-selected-works-1/preview.mp4`.
 - Pada desktop 1440×900, title rail dan awal visual pertama harus sudah masuk first viewport. Pada mobile 390×844, grid berubah menjadi satu kolom tanpa horizontal overflow.
 - Setiap project memakai title rail putih tipis di atas visual; hover hanya memperkuat veil, zoom media sedikit, dan mengangkat lockup pada card terkait. Rail dan seluruh row tidak ikut berubah.
 - Surface memakai off-white, tipografi hampir hitam, outline media hitam transparan, dan radius hanya untuk menyatukan rail dengan media. Tidak ada identitas atau copy dari referensi.
@@ -21,21 +31,21 @@
 ## Visual asset contract
 
 - Setiap project memiliki dua visual raster original: cover dan detail.
-- Aset live wajib berupa WebP di `public/library/sections/selected-works/<slug>/visual-01.webp` dan `visual-02.webp`.
+- Aset live wajib berupa WebP di `public/library/sections/4-selected-works-1/<slug>/visual-01.webp` dan `visual-02.webp`.
 - Visual tidak boleh membawa teks, logo, UI, watermark, atau dependensi remote. SVG studies lama bukan bagian dari implementasi aktif.
 - Cinder Bureau memakai graphite rubbing, deckled paper, mineral dust, dan thread vermilion; Auralis memakai acrylic prism dan optical membrane cyan; Stillhouse memakai fragment arsitektur plaster/basalt; Vela Objects memakai lacquer merah, ceramic forms, dan shadow keras.
 
 ## Route contract
 
 ```text
-/library/sections/selected-works
-/library/sections/selected-works/cinder-bureau
-/library/sections/selected-works/auralis
-/library/sections/selected-works/stillhouse
-/library/sections/selected-works/vela-objects
+/library/sections/4-selected-works-1
+/library/sections/4-selected-works-1/cinder-bureau
+/library/sections/4-selected-works-1/auralis
+/library/sections/4-selected-works-1/stillhouse
+/library/sections/4-selected-works-1/vela-objects
 ```
 
-`/library/sections/selected-works` adalah full preview utama. Halaman project adalah child page dari template itu, bukan entry katalog masing-masing.
+`/library/sections/4-selected-works-1` adalah full preview utama. Halaman project adalah child page dari template itu, bukan entry katalog masing-masing.
 
 ## Interaction and motion
 
@@ -52,6 +62,7 @@
 
 - Satu asset catalog entry `4 Selected Works (1)` membuka preview section.
 - Empat project muncul di preview dan setiap project membuka nested child route.
-- Delapan visual WebP berada di `public/library/sections/selected-works/` dan seluruh metadata aktif mengarah ke aset tersebut.
+- Delapan visual WebP berada di `public/library/sections/4-selected-works-1/` dan seluruh metadata aktif mengarah ke aset tersebut.
+- R2 delivery memakai prefix `sections/4-selected-works-1/`; master prompt memakai URL hosted untuk seluruh visual raster.
 - References, metadata, source, CSS, route, test, dan docs tersedia.
 - Tidak ada `/works/<slug>` root route atau empat catalog card terpisah.

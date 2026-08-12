@@ -16,18 +16,19 @@ export type SelectedWork = {
   builtFrom: readonly string[];
 };
 
-const sectionRoute = "/library/sections/selected-works";
+const sectionRoute = "/library/sections/4-selected-works-1";
 
 export const selectedWorksAsset = {
-  slug: "selected-works",
+  slug: "4-selected-works-1",
   title: "4 Selected Works (1)",
   type: "section" as const,
   category: "Works",
-  status: "review" as const,
+  status: "published" as const,
   access: "Free" as const,
   tags: ["portfolio", "editorial", "case-study"],
-  preview: "/library/sections/selected-works/cinder-bureau/visual-01.webp",
-  previewVideo: "/library/sections/selected-works/preview.mp4",
+  preview: "/library/sections/4-selected-works-1/cinder-bureau/visual-01.webp",
+  previewVideo: "/library/sections/4-selected-works-1/preview.mp4",
+  promptUrl: "/library/sections/4-selected-works-1/master-prompt.md",
   sourceAvailable: true,
   route: sectionRoute,
 };
@@ -47,8 +48,8 @@ export const SELECTED_WORKS: readonly SelectedWork[] = [
     fictionalLabel: "Fictional case study — independent concept",
     route: `${sectionRoute}/cinder-bureau`,
     visuals: [
-      "/library/sections/selected-works/cinder-bureau/visual-01.webp",
-      "/library/sections/selected-works/cinder-bureau/visual-02.webp",
+      "/library/sections/4-selected-works-1/cinder-bureau/visual-01.webp",
+      "/library/sections/4-selected-works-1/cinder-bureau/visual-02.webp",
     ],
     visualCaptions: ["Graphite, stone, and printed matter", "An identity held in material"],
     builtFrom: ["Editorial hero", "Studio index", "Material-led type system"],
@@ -67,8 +68,8 @@ export const SELECTED_WORKS: readonly SelectedWork[] = [
     fictionalLabel: "Fictional case study — independent concept",
     route: `${sectionRoute}/auralis`,
     visuals: [
-      "/library/sections/selected-works/auralis/visual-01.webp",
-      "/library/sections/selected-works/auralis/visual-02.webp",
+      "/library/sections/4-selected-works-1/auralis/visual-01.webp",
+      "/library/sections/4-selected-works-1/auralis/visual-02.webp",
     ],
     visualCaptions: ["Perception as a starting point", "Research translated through touch"],
     builtFrom: ["Luminous hero", "Research index", "Human signal studies"],
@@ -87,8 +88,8 @@ export const SELECTED_WORKS: readonly SelectedWork[] = [
     fictionalLabel: "Fictional case study — independent concept",
     route: `${sectionRoute}/stillhouse`,
     visuals: [
-      "/library/sections/selected-works/stillhouse/visual-01.webp",
-      "/library/sections/selected-works/stillhouse/visual-02.webp",
+      "/library/sections/4-selected-works-1/stillhouse/visual-01.webp",
+      "/library/sections/4-selected-works-1/stillhouse/visual-02.webp",
     ],
     visualCaptions: ["A room held by light", "A stair reduced to its rhythm"],
     builtFrom: ["Gallery hero", "Project index", "Spatial image studies"],
@@ -107,8 +108,8 @@ export const SELECTED_WORKS: readonly SelectedWork[] = [
     fictionalLabel: "Fictional case study — independent concept",
     route: `${sectionRoute}/vela-objects`,
     visuals: [
-      "/library/sections/selected-works/vela-objects/visual-01.webp",
-      "/library/sections/selected-works/vela-objects/visual-02.webp",
+      "/library/sections/4-selected-works-1/vela-objects/visual-01.webp",
+      "/library/sections/4-selected-works-1/vela-objects/visual-02.webp",
     ],
     visualCaptions: ["A vessel with a quiet pull", "Objects arranged as an editorial field"],
     builtFrom: ["Product hero", "Editorial commerce grid", "Object detail system"],

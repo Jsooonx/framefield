@@ -1,60 +1,10 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import { SELECTED_WORKS, type SelectedWork } from "../metadata";
-import "./selected-works.css";
-
-const EASE_OUT = [0.22, 1, 0.36, 1] as const;
-const DETAIL_EASE = [0.2, 0.8, 0.2, 1] as const;
-
-export function SelectedWorks() {
-  const shouldReduceMotion = useReducedMotion();
-
-  return (
-    <main className="selected-works-preview">
-      <motion.section
-        className="selected-works-masthead"
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.58, ease: EASE_OUT }}
-      >
-        <span className="selected-works-count">(04)</span>
-        <div className="selected-works-masthead-lockup">
-          <h1>Projects.</h1>
-          <span>©2026</span>
-        </div>
-      </motion.section>
-
-      <section className="selected-works-grid" aria-label="Selected projects">
-        {SELECTED_WORKS.map((work, index) => (
-          <motion.article
-            className={`selected-work-card selected-work-card--${work.accent}`}
-            key={work.slug}
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.46, delay: shouldReduceMotion ? 0 : 0.12 + index * 0.07, ease: EASE_OUT }}
-          >
-            <div className="selected-work-title-rail">
-              <span>{work.title}.</span>
-              <span>{work.year}</span>
-              <i aria-hidden="true">•••</i>
-            </div>
-            <a className="selected-work-media" href={work.route} aria-label={`Open ${work.title} case study`}>
-              <img src={work.visuals[0]} alt="" />
-              <span className="selected-work-lockup">
-                <strong>{work.title}</strong>
-                <ArrowUpRight aria-hidden="true" size={17} />
-              </span>
-            </a>
-          </motion.article>
-        ))}
-      </section>
-
-      <PreviewBack />
-    </main>
-  );
-}
+import { type SelectedWork } from "../metadata";
+import { detailEnter, detailReveal } from "./selected-works-motion";
+import { PreviewBack } from "./SelectedWorksPreview";
 
 export function SelectedWorkDetail({
   work,
@@ -72,7 +22,7 @@ export function SelectedWorkDetail({
       <section className="work-detail-archive" aria-labelledby="work-detail-title">
         <motion.div className="work-detail-context" {...detailEnter(shouldReduceMotion, 0.06)}>
           <span>{work.fictionalLabel}</span>
-          <a className="work-template-back" href="/library/sections/selected-works">
+          <a className="work-template-back" href="/library/sections/4-selected-works-1">
             <ArrowLeft size={14} /> All projects
           </a>
         </motion.div>
@@ -155,33 +105,5 @@ export function SelectedWorkDetail({
 
       <PreviewBack />
     </main>
-  );
-}
-
-function detailEnter(shouldReduceMotion: boolean | null, delay: number) {
-  return {
-    initial: shouldReduceMotion ? false : { opacity: 0, y: 22 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.72, delay: shouldReduceMotion ? 0 : delay, ease: DETAIL_EASE },
-  };
-}
-
-function detailReveal(shouldReduceMotion: boolean | null, delay: number) {
-  return {
-    initial: shouldReduceMotion ? false : { opacity: 0, y: 28 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.2 },
-    transition: { duration: 0.7, delay: shouldReduceMotion ? 0 : delay, ease: DETAIL_EASE },
-  };
-}
-
-function PreviewBack() {
-  return (
-    <a className="selected-works-library-back" href="/#library">
-      <span className="selected-works-library-back-icon" aria-hidden="true">
-        <ArrowLeft size={13} strokeWidth={2} />
-      </span>
-      Back to library
-    </a>
   );
 }

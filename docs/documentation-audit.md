@@ -24,10 +24,10 @@ Setiap perubahan product-level harus masuk ke ledger ini atau ke entry baru di b
 | Feature / capability | Status | First documented | Current source | Notes |
 | --- | --- | --- | --- | --- |
 | Homepage editorial shell | Shipped | `framefield-overview.md` | `src/app/page.tsx` | Hero, library, pricing, footer |
-| Placeholder catalog | Shipped temporarily | `framefield-overview.md` | `src/app/page.tsx` | Akan digantikan asset registry bertahap |
+| Homepage landing catalog placeholders | Shipped temporarily | `framefield-overview.md` | `src/app/page.tsx` | Hanya card yang belum memiliki implementation; dua entry pertama sudah terisi |
 | Dedicated full preview routes | Shipped | `element-implementation.md` | `src/app/library/sections/material-office/page.tsx` | Pertama tersedia di `/library/sections/material-office`; production smoke test sudah mencakup route ini |
 | Material Office hero + menu | Shipped (video active) | `library/sections/material-office/design.md` | `library/sections/material-office/source/MaterialOffice.tsx` | Video dan catalog WebP sudah tersedia |
-| Selected Works template | Shipped | `library/sections/selected-works/design.md` | `library/sections/selected-works/metadata.ts`, `src/app/library/sections/selected-works/` | Satu template editorial dengan empat fictional child project dan delapan visual WebP lokal |
+| 4 Selected Works (1) template | Shipped | `library/sections/4-selected-works-1/design.md` | `library/sections/4-selected-works-1/metadata.ts`, `src/app/library/sections/4-selected-works-1/` | Satu template editorial dengan empat fictional child project, delapan visual WebP lokal, dan standalone master prompt |
 | WebP preview recording | Shipped (asset pertama) | `element-implementation.md` | `public/library/sections/material-office/preview.webp` | Dibuat dari export preview route |
 | User upload/CMS | Out of scope | `framefield-overview.md` | Tidak ada | Repository tetap jadi sumber awal |
 | Payment/subscription backend | Out of scope | `framefield-overview.md` | Tidak ada | Jangan mendokumentasikan seolah sudah tersedia |
@@ -41,7 +41,9 @@ Status yang valid:
 - `Out of scope` — sengaja tidak dibangun pada fase ini.
 - `Archived` — pernah ada atau pernah direncanakan, lalu dihentikan.
 
-`Shipped` pada feature ledger berarti implementation dan route sudah tersedia di repository. `review` pada `metadata.ts` berarti asset belum dianggap final published karena masih menunggu visual/technical QA. Keduanya boleh muncul bersamaan, tetapi statusnya harus dijelaskan di source document.
+`Shipped` pada feature ledger berarti implementation dan route sudah tersedia di repository. Metadata asset yang sudah melalui visual/technical QA memakai `status: "published"`; `review` hanya untuk asset yang implementation-nya ada tetapi belum final. `sourceAvailable: true` hanya menyatakan source implementation/prompt ada di repository, bukan bahwa user sudah memiliki download, licensing, authentication, atau payment flow.
+
+Path `selected-works` yang muncul di change log lama adalah snapshot historis dan superseded. Sejak 2026-08-11, source aktif memakai `4-selected-works-1`; jangan membuat link atau implementation baru menggunakan path lama.
 
 ## 3. Change log keputusan
 
@@ -160,15 +162,15 @@ Audit tidak perlu membuat dokumen baru setiap kali. Jika perubahan kecil, update
 
 ## 8. Current audit result
 
-Per 2026-08-09:
+Per 2026-08-12:
 
 - Homepage shell sudah ada.
 - Catalog masih berisi placeholder untuk asset lain; Material Office sudah menjadi asset live pertama.
-- Selected Works tersedia sebagai satu template di Library, dengan empat static-generated child route, delapan visual WebP lokal, dan preview project index editorial terang.
+- `4 Selected Works (1)` tersedia sebagai satu template di Library, dengan empat static-generated child route, delapan visual WebP lokal, preview project index editorial terang, dan master prompt code-first yang disalin ke package/public path.
 - Material Office memiliki package, poster fallback, metadata, catalog entry, source, dan full preview route yang sudah diverifikasi.
 - Automated WebP recording pipeline belum ada; Material Office sudah memiliki recording source dan catalog WebP hasil proses manual.
 - CMS, upload, auth, payment, dan source delivery backend belum masuk scope.
-- Video recording katalog untuk Selected Works belum masuk scope; halaman memakai WebP raster studies yang ringan dan full-preview ready.
+- Video recording katalog untuk `4 Selected Works (1)` tersedia di `public/library/sections/4-selected-works-1/preview.mp4`; halaman tetap memakai WebP raster studies sebagai visual source of truth.
 - Dokumen baru sudah memisahkan product overview, element contract, workflow, dan audit rules agar tidak saling mengulang.
 
 ### 2026-08-05 — Material Office menu became an Editorial Index
@@ -395,3 +397,29 @@ Per 2026-08-09:
 - Reason: Clip reveal pada display typography dapat memotong bagian bawah glyph ketika viewport menangkap state transisi.
 - Source of truth updated: `library/sections/selected-works/source/SelectedWorks.tsx`, `library/sections/selected-works/design.md`, dan `tests/selected-works.test.mjs`.
 - Follow-up: Entrance animation untuk display text tidak boleh memakai clipping kecuali container dan glyph bounds sudah diverifikasi pada semua target viewport.
+
+### 2026-08-11 — 4 Selected Works (1) package cleanup and master prompt
+
+- Type: Changed | Removed | Added
+- Area: Asset pipeline | UI | Prompt product | Documentation
+- Decision: Memigrasikan package, public assets, route, dan R2 naming dari `selected-works` ke URL-safe `4-selected-works-1`; memisahkan source preview/detail/motion; menghapus delapan SVG orphan dari empat folder lama; dan menambahkan master prompt standalone code-first di package serta public path.
+- Reason: Menyamakan nama title, folder, route, dan R2 prefix tanpa membawa asset lama atau struktur source yang bercampur ke delivery berikutnya.
+- Source of truth updated: `library/sections/4-selected-works-1/`, `src/app/library/sections/4-selected-works-1/`, `public/library/sections/4-selected-works-1/`, `tests/selected-works.test.mjs`, dan docs terkait.
+- Follow-up: R2 menggunakan prefix `sections/4-selected-works-1/`; prompt standalone tidak membawa host catalog controls.
+
+### 2026-08-12 — Testimonials package removed
+
+- Type: Removed
+- Area: Product | UI | Asset pipeline | Documentation
+- Decision: Menghapus package testimonials yang dihentikan, termasuk route preview, entry katalog, source, focused tests, generated WebP, references, master prompt, dan seluruh dokumentasi aktifnya.
+- Reason: Direction testimonials ini dihentikan sebelum dipublikasikan dan tidak boleh menyisakan route, asset, atau narasi katalog yang aktif.
+- Source of truth updated: `src/app/page.tsx`, `src/app/globals.css`, `docs/`, dan package/public/route/test terkait telah dihapus.
+
+### 2026-08-12 — Shipped asset status and Selected Works R2 delivery
+
+- Type: Changed | Added
+- Area: Asset pipeline | Documentation
+- Decision: Menetapkan Material Office dan `4 Selected Works (1)` sebagai asset `published`; memperjelas bahwa placeholder hanya merujuk pada card landing catalog yang belum terisi; menyamakan access values menjadi `Free` atau `Premium`; dan mengunggah delapan WebP study serta `preview.mp4` ke R2 pada prefix `sections/4-selected-works-1/`. `master-prompt.md` tidak diunggah.
+- Reason: Menyamakan metadata, docs, dan delivery asset dengan status produk yang sebenarnya tanpa mencampur source repository dengan user download/licensing flow.
+- Source of truth updated: `library/sections/material-office/metadata.ts`, `library/sections/4-selected-works-1/metadata.ts`, docs current-truth, dan R2 bucket `framefield-assets`.
+- Follow-up: Source delivery/download, licensing, authentication, dan payment tetap berada di luar scope saat ini.

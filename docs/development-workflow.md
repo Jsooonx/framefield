@@ -54,13 +54,13 @@ Implementasi harus mengikuti design contract dan tetap terisolasi dari homepage 
 - Jangan memasukkan elemen ke katalog sebagai published sebelum full preview stabil.
 - Perubahan yang menambah/menghapus scope harus masuk [Documentation Audit](./documentation-audit.md).
 
-### 4A. Workflow Selected Works
+### 4A. Workflow 4 Selected Works (1)
 
 Untuk fictional case study, gunakan urutan berikut:
 
 1. Tentukan identity, category, brief, visual direction, dan dua visual study.
-2. Buat satu package section di `library/sections/selected-works/`; metadata menyimpan semua project record tanpa membuat asset registry terpisah.
-3. Simpan visual study lokal di `public/library/sections/selected-works/<slug>/` dan pertahankan label fictional pada detail page.
+2. Buat satu package section di `library/sections/4-selected-works-1/`; metadata menyimpan semua project record tanpa membuat asset registry terpisah. Gunakan `4-selected-works-1` sebagai nama folder, route slug, dan R2 prefix agar URL tetap aman.
+3. Simpan visual study lokal di `public/library/sections/4-selected-works-1/<slug>/` dan pertahankan label fictional pada detail page.
 4. Pastikan card template di Library hanya memberi micro-interaction lokal: preview image, action state, focus-visible, dan press feedback.
 5. Pastikan detail page memiliki hierarchy hero → metadata → narrative → gallery → built-from → previous/next.
 6. Uji semua slug dari registry, bukan hanya work yang sedang dibuka.
@@ -72,7 +72,7 @@ Setelah implementation selesai:
 1. Buka dedicated route.
 2. Cek desktop, mobile, focus/hover, dan reduced motion.
 3. Record preview dari route yang sama.
-4. Export `preview.webp` dan simpan di `public/library/sections/<slug>/`.
+4. Export catalog fallback image (umumnya `preview.webp`) dan simpan di `public/library/sections/<slug>/`.
 5. Jika recording video ingin dimainkan langsung di kartu, simpan juga `preview.mp4` dan isi field `previewVideo` di metadata.
 6. Isi metadata dan hubungkan asset ke registry/catalog.
 7. Pastikan kartu katalog membuka full preview yang sama dengan source.
@@ -87,7 +87,8 @@ Minimal validation sebelum handoff:
 - Full test suite: `node --test tests/*.mjs`.
 - Production build: `npm run build`.
 - Smoke test route utama dan route preview.
-- Smoke test `/library/sections/selected-works` beserta empat child route project-nya.
+- Smoke test `/library/sections/4-selected-works-1` beserta empat child route project-nya.
+- Smoke test dedicated route asset yang sedang dikerjakan.
 - Visual check pada desktop/mobile.
 - Audit dokumentasi dan feature ledger.
 

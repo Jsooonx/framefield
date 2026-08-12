@@ -28,7 +28,7 @@ Saat ini website masih berbentuk single-page homepage di `src/app/page.tsx` deng
 3. **Homepage Pricing** — penjelasan free vs premium dan CTA library untuk landing page Framefield.
 4. **Footer** — brand closing, navigasi, dan back-to-top.
 
-Selected Works adalah satu template section di dalam Library. Ia menampilkan empat fictional case studies di full preview dan menjadi pintu masuk ke child route `/library/sections/selected-works/<slug>`.
+`4 Selected Works (1)` adalah satu template section di dalam Library. Ia menampilkan empat fictional case studies di full preview dan menjadi pintu masuk ke child route `/library/sections/4-selected-works-1/<slug>`. Folder, route slug, dan R2 prefix memakai nama URL-safe `4-selected-works-1`.
 
 Komponen utama yang sudah ada:
 
@@ -40,7 +40,7 @@ Komponen utama yang sudah ada:
 - `Footer`
 - `RollingText` untuk CTA per-letter
 - `TypeTicker` untuk kategori website di hero
-- `library/sections/selected-works/metadata.ts` sebagai source of truth untuk empat child project fictional
+- `library/sections/4-selected-works-1/metadata.ts` sebagai source of truth untuk empat child project fictional
 - Frame dan section reveal motion
 
 ## 4. Status pengembangan
@@ -51,16 +51,16 @@ Komponen utama yang sudah ada:
 | Homepage editorial shell | Selesai | Hero, navigation, library, pricing, dan footer tersedia. |
 | Lichen Editorial color palette | Selesai | Palette aktif dipakai di `src/app/globals.css`. |
 | Framefield logo mark | Selesai | Asset berada di `public/framefield-mark.png`. |
-| Placeholder catalog | Selesai sementara | Catalog berisi placeholder entries agar bentuk katalog dapat diuji tanpa template final. |
+| Homepage landing catalog | Selesai | Landing page memuat dua catalog entry yang sudah terisi (Material Office dan `4 Selected Works (1)`) serta beberapa placeholder card untuk katalog yang belum dirilis. |
 | Empty/placeholder states | Selesai | Card menampilkan `Coming soon` dan `Preview soon` sesuai status; source CTA sudah dikonversi menjadi `Copy Prompt`. |
 | CTA hover motion | Selesai | Semua CTA utama memakai per-letter rolling track dan contrast color swap. |
-| Dedicated route per element | Selesai (asset pertama) | Material Office tersedia di `/library/sections/material-office`. |
-| Asset package per element | Selesai (asset pertama) | Material Office memiliki references, design contract, source, metadata, dedicated route, poster fallback, dan catalog media di `library/sections/material-office/`. |
+| Dedicated route per element | Selesai (2 asset) | Material Office dan `4 Selected Works (1)` tersedia melalui dedicated route masing-masing. |
+| Asset package per element | Selesai (2 asset) | Kedua asset memiliki references, design contract, source, metadata, dedicated route, dan catalog media di package masing-masing. |
 | Full preview recording → WebP | Selesai (asset pertama) | Material Office memiliki `preview.webp` sebagai fallback katalog dan `preview.mp4` sebagai live catalog preview source. |
 | Selected Works template section | Selesai | Library memiliki satu asset card `Selected Works` yang membuka full preview section. |
-| Fictional case-study child routes | Selesai | Empat route project berada di bawah `/library/sections/selected-works/<slug>` dan static-generated saat build. |
+| Fictional case-study child routes | Selesai | Empat route project berada di bawah `/library/sections/4-selected-works-1/<slug>` dan static-generated saat build. |
 | Prompt copy flow | Selesai (asset pertama) | Catalog card Material Office menyediakan CTA `Copy Prompt` yang mengambil master prompt code-first; dedicated preview tidak membawa CTA katalog. |
-| Source delivery/download flow | Belum dimulai | Belum ada backend, auth, licensing, atau payment flow. |
+| Source delivery/download flow | Belum dimulai | `sourceAvailable` hanya berarti source implementation/prompt tersedia di repository; belum ada backend download, auth, licensing, atau payment flow. |
 | CMS/admin input | Belum dimulai | Untuk fase awal, asset registry masih dikelola dari repository. |
 
 ## 5. Batasan scope saat ini
@@ -97,6 +97,6 @@ Fitur yang masuk atau keluar dari scope harus dicatat di [Documentation Audit](.
 - CTA feedback harus lokal, cepat, interruptible, dan menghormati reduced motion.
 - Asset kosong boleh ditampilkan sebagai placeholder selama sistem katalog sedang disiapkan.
 - Original Stackframe tetap dianggap project terpisah dan tidak menjadi target perubahan.
-- Selected Works memakai delapan visual WebP fictional original (dua per case study) dan detail page archive dengan staggered Motion entrance, sehingga halaman dapat dipreview penuh tanpa SVG study atau dependensi remote.
+- `4 Selected Works (1)` memakai delapan visual WebP fictional original (dua per case study), detail page archive dengan staggered Motion entrance, dan standalone master prompt code-first yang menunjuk ke R2, sehingga halaman dapat dipreview penuh tanpa SVG study atau dependensi remote.
 
 Detail brand yang lebih lengkap tetap berada di [Brand Foundation](../branding.md); dokumen ini hanya menyimpan keputusan yang dibutuhkan untuk memahami product scope dan status.

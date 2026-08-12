@@ -1,5 +1,7 @@
 # 4 Selected Works (1) Codebase Cleanup and Master Prompt — Design Spec
 
+> Status: Historical snapshot. Current truth lives in `docs/framefield-overview.md`, `docs/element-implementation.md`, `docs/documentation-audit.md`, and `library/sections/4-selected-works-1/`.
+
 ## Goal
 
 Make the `4 Selected Works (1)` package easier to maintain while preserving its current visual output, routes, interactions, and fictional case-study content. Add a standalone code-first master prompt that lets another AI agent recreate the section using the canonical implementation and hosted assets.
@@ -88,4 +90,3 @@ The prompt may describe the host integration separately, but the canonical imple
   - `/library/sections/4-selected-works-1/auralis`
   - `/library/sections/4-selected-works-1/stillhouse`
   - `/library/sections/4-selected-works-1/vela-objects`
-
