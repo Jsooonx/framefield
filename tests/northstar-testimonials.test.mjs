@@ -154,6 +154,16 @@ test("NORTHSTAR catalog delivery keeps visual assets local and the prompt out of
   }
 });
 
+test("NORTHSTAR master prompt is standalone and has no host navigation residue", () => {
+  const packagePrompt = read("library/sections/northstar-testimonials/master-prompt.md");
+  const publicPrompt = read("public/library/sections/northstar-testimonials/master-prompt.md");
+
+  for (const prompt of [packagePrompt, publicPrompt]) {
+    assert.doesNotMatch(prompt, /Framefield|NorthstarBack|northstar-library-back|Back to library|href=["']\/#library["']/);
+    assert.doesNotMatch(prompt, /host wrapper|host CTA|host-only|catalog wrapper|Copy Prompt|payment UI/i);
+  }
+});
+
 test("NORTHSTAR bento keeps every card in a bounded area and uses the generated imagery", () => {
   const source = read("library/sections/northstar-testimonials/source/NorthstarTestimonials.tsx");
   const styles = read("library/sections/northstar-testimonials/source/northstar-testimonials.css");

@@ -1,6 +1,6 @@
 # Element Design Brief: Material Office
 
-> Status: review
+> Status: published
 > Type: section
 > Slug: `material-office`
 > Owner: Framefield
@@ -122,7 +122,7 @@ Referensi hanya dipakai sebagai grammar layout. Tidak ada brand, copy, foto port
 - **Master prompt:** `library/sections/material-office/master-prompt.md`, a standalone code-first rebuild prompt containing the canonical TSX/CSS structure and exact R2 asset URLs; the public mirror is fetched by the catalog CTA at `/library/sections/material-office/master-prompt.md`.
 - **Catalog video:** `/library/sections/material-office/preview.mp4`, dimainkan muted dan looping di kartu katalog dengan `preview.webp` sebagai fallback image.
 - **Fallback behavior:** hero route memakai poster jika hero video tidak tersedia; catalog card memakai WebP jika catalog video gagal dimuat. Media slot tetap tidak mengubah DOM layout.
-- **Metadata:** `library/sections/material-office/metadata.ts`, status saat ini `review` karena menunggu visual/technical QA; asset sudah memiliki route, video, WebP, metadata, dan dokumentasi lengkap.
+- **Metadata:** `library/sections/material-office/metadata.ts`, status saat ini `published`; asset sudah memiliki route, video, WebP, metadata, dokumentasi, dan visual/technical QA.
 - **Preview recording viewport:** desktop 1440x960 dan mobile 390x844. Source recording 1440x810, 30 fps, 5.37 detik, tanpa audio; catalog WebP adalah still frame tervalidasi 960x540.
 - **Dependencies:** Next.js 15, React 19, TypeScript, Motion, Lucide React; tidak perlu backend/CMS/database.
 
@@ -135,7 +135,7 @@ Referensi hanya dipakai sebagai grammar layout. Tidak ada brand, copy, foto port
 [x] Full preview route works
 [x] Desktop checked
 [x] Mobile checked
-[ ] Reduced-motion checked
+[x] Reduced-motion checked
 [x] Poster fallback generated
 [x] Video integrated after Google Flow export
 [x] Preview WebP recorded

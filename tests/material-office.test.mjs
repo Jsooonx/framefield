@@ -61,6 +61,16 @@ test("Material Office metadata identifies the preview route", () => {
   assert.match(content, /route:\s*"\/library\/sections\/material-office"/);
 });
 
+test("Material Office design contract reflects its published reduced-motion QA", () => {
+  const design = readFileSync(new URL("../library/sections/material-office/design.md", import.meta.url), "utf8");
+  const content = readFileSync(metadata, "utf8");
+
+  assert.match(content, /status:\s*"published"/);
+  assert.match(design, /> Status: published/);
+  assert.doesNotMatch(design, /status saat ini `review`/);
+  assert.match(design, /\[x\] Reduced-motion checked/);
+});
+
 test("Material Office keeps prompt copying outside the dedicated preview", () => {
   assert.equal(existsSync(masterPrompt), true);
   const prompt = readFileSync(masterPrompt, "utf8");

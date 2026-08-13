@@ -1,6 +1,6 @@
 # MASTER PROMPT — NORTHSTAR Testimonials exact code rebuild
 
-Build the NORTHSTAR Testimonials section as a standalone React/Next.js implementation. This is a code-first prompt: preserve the DOM order, class names, values, motion timing, easing, responsive breakpoints, fictional-content disclaimers, and asset mapping. Do not add Framefield branding, a navbar, a footer, a catalog wrapper, a payment flow, or a `Back to library` control inside the standalone rebuild.
+Build the NORTHSTAR Testimonials section as a standalone React/Next.js implementation. This is a code-first prompt: preserve the DOM order, class names, values, motion timing, easing, responsive breakpoints, fictional-content disclaimers, and asset mapping. Do not add unrelated site chrome, branding, or return navigation inside the standalone rebuild.
 
 ## 1. Required stack
 
@@ -9,15 +9,15 @@ Build the NORTHSTAR Testimonials section as a standalone React/Next.js implement
 - CSS imported by the section entry point and scoped under `.northstar-shell`.
 - The section is an Experience surface: the bento and metrics story are the artifact.
 
-## 2. Hosted visual assets — use these exact URLs
+## 2. Visual assets — use these exact URLs
 
 - Atlas House portrait: https://assets.framefield.my.id/sections/northstar-testimonials/atlas-house-portrait.webp
 - Cobalt data field: https://assets.framefield.my.id/sections/northstar-testimonials/cobalt-data-field.webp
 - Performance orbit: https://assets.framefield.my.id/sections/northstar-testimonials/performance-orbit.webp
 - Pipeline texture: https://assets.framefield.my.id/sections/northstar-testimonials/pipeline-texture.webp
-- Catalog preview video: https://assets.framefield.my.id/sections/northstar-testimonials/preview.mp4
+- Optional preview video asset: https://assets.framefield.my.id/sections/northstar-testimonials/preview.mp4
 
-The four images are original illustrative assets. NORTHSTAR names, testimonials, metrics, outcomes, and Atlas House are fictional demonstration content; keep that framing in the rendered section. Use the MP4 only for the host catalog preview, not as a hero inside the standalone NORTHSTAR page.
+The four images are original illustrative assets. NORTHSTAR names, testimonials, metrics, outcomes, and Atlas House are fictional demonstration content; keep that framing in the rendered section. The optional MP4 is a delivery preview asset and is not rendered inside the standalone section.
 
 ## 3. Required files
 
@@ -25,10 +25,10 @@ Create or adapt these files without changing the canonical internals below:
 
 - `NorthstarTestimonials.tsx` — overview bento and inline metrics story.
 - `NorthstarMetrics.tsx` — metric-led proof surfaces.
-- `northstar-motion.tsx` — counters, shared easing, and host-independent motion helpers.
+- `northstar-motion.tsx` — counters, shared easing, and motion helpers.
 - `northstar-testimonials.css` — scoped visual system and responsive rules.
 
-The host may add its own route adapter outside these files. The implementation must remain a single overview route plus the Atlas House detail route, with metrics inline below the bento.
+Keep any route adapter outside these files. The implementation must remain a single overview route plus the Atlas House detail route, with metrics inline below the bento.
 
 ## 4. Behavior contract
 
@@ -39,7 +39,7 @@ The host may add its own route adapter outside these files. The implementation m
 - Pipeline bars enter from the baseline with a stagger.
 - The Experience Signal card keeps `Page speed +48%` and `conversion lift +42%` as two visually distinct lines using 1.04 line-height, pretty wrapping, and a small inter-line gap.
 - The Atlas House card remains explicitly fictional and links to the detail route.
-- Keep the host-only Back to library control outside this prompt.
+- Keep navigation outside this standalone section.
 
 ## 5. Canonical source
 
@@ -53,7 +53,7 @@ Copy the following source exactly.
 import { ArrowUpRight, MoveUpRight, Star } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { NORTHSTAR_TESTIMONIALS } from "../metadata";
-import { MetricCounter, NORTHSTAR_EASE, NorthstarBack } from "./northstar-motion";
+import { MetricCounter, NORTHSTAR_EASE } from "./northstar-motion";
 import { NorthstarMetrics } from "./NorthstarMetrics";
 import "./northstar-testimonials.css";
 
@@ -119,7 +119,6 @@ export function NorthstarTestimonials() {
         </motion.article>
       </section>
       <NorthstarMetrics />
-      <NorthstarBack />
     </main>
   );
 }
@@ -219,7 +218,6 @@ export function NorthstarMetrics() {
 ```tsx
 "use client";
 
-import { ArrowLeft } from "lucide-react";
 import { useInView, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
@@ -265,18 +263,6 @@ export function MetricCounter({ value, prefix = "", suffix = "", decimals = Numb
   );
 }
 
-export function NorthstarBack() {
-  return (
-    <a className="northstar-library-back" href="/#library">
-      <span className="northstar-library-back-icon" aria-hidden="true">
-        <ArrowLeft size={13} strokeWidth={2} />
-      </span>
-      Back to library
-    </a>
-  );
-}
-
-
 ```
 
 ### library/sections/northstar-testimonials/source/northstar-testimonials.css
@@ -311,66 +297,6 @@ export function NorthstarBack() {
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.09em;
-}
-
-.northstar-library-back {
-  position: fixed;
-  right: clamp(24px, 3.7vw, 56px);
-  bottom: 14px;
-  z-index: 20;
-  display: inline-flex;
-  gap: 9px;
-  min-height: 34px;
-  align-items: center;
-  padding: 5px 11px 5px 6px;
-  border: 1px solid rgba(243, 240, 231, 0.28);
-  border-radius: 999px;
-  color: #f3f0e7 !important;
-  background: rgba(16, 18, 20, 0.46);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-  backdrop-filter: blur(14px);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  text-decoration: none;
-  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease;
-}
-
-.northstar-library-back::after {
-  position: absolute;
-  inset: -5px;
-  content: "";
-}
-
-.northstar-library-back:hover,
-.northstar-library-back:focus-visible {
-  border-color: rgba(243, 240, 231, 0.58);
-  color: #c8ff4a !important;
-  background: rgba(16, 18, 20, 0.72);
-}
-
-.northstar-library-back:active { transform: scale(0.96); }
-.northstar-library-back:focus-visible,
-.northstar-shell a:focus-visible { outline: 2px solid var(--northstar-blue); outline-offset: 3px; }
-.northstar-library-back:focus-visible { outline: 2px solid #c8ff4a; outline-offset: 4px; }
-
-.northstar-library-back-icon {
-  display: grid;
-  width: 22px;
-  height: 22px;
-  place-items: center;
-  border: 1px solid rgba(243, 240, 231, 0.48);
-  border-radius: 50%;
-  color: #c8ff4a;
-  background: rgba(200, 255, 74, 0.08);
-  transition: border-color 180ms ease, background-color 180ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.northstar-library-back:hover .northstar-library-back-icon,
-.northstar-library-back:focus-visible .northstar-library-back-icon {
-  border-color: rgba(200, 255, 74, 0.72);
-  background: rgba(200, 255, 74, 0.16);
-  transform: translateX(-2px);
 }
 
 .northstar-overview { min-height: 115svh; }
@@ -506,7 +432,7 @@ export function NorthstarBack() {
 }
 
 @media (max-width: 560px) {
-  .northstar-shell { padding: 1rem; }.northstar-library-back { right: 20px; bottom: 16px; }.northstar-overview-intro { margin-top: 4.2rem; text-align: left; }.northstar-overview-intro h1 { font-size: clamp(3.8rem, 20vw, 5.1rem); }.northstar-overview-intro p { margin-left: 0; }.northstar-bento { grid-template-columns: 1fr; grid-template-areas: "confidence" "quote-one" "statement" "quote-two" "cta" "note"; grid-template-rows: auto; }.northstar-card { min-height: 13rem; }.northstar-card--confidence { min-height: 25rem; }.northstar-card--statement { min-height: 19rem; }.northstar-card--quote-two { min-height: 17rem; }.northstar-metrics-section { padding-top: 7rem; padding-bottom: 3rem; }.northstar-metrics-lead h1 { font-size: clamp(3.25rem, 15vw, 4.35rem); }.northstar-metrics-row { gap: 2.3rem 1rem; margin-top: 4rem; }.northstar-metrics-row .northstar-counter { font-size: clamp(3rem, 17vw, 4.6rem); }.northstar-approach { margin: 7rem 0 4rem; }.northstar-approach p { font-size: clamp(2.05rem, 11vw, 3rem); }.northstar-results-grid { grid-template-columns: 1fr; }.northstar-result-card--atlas,.northstar-result-card--conversion { grid-row: auto; min-height: 27rem; }.northstar-result-card--score,.northstar-result-card--pipeline { min-height: 15rem; }.northstar-case-head { display: block; margin-top: 4.3rem; }.northstar-case-head h1 { font-size: clamp(4rem, 19vw, 5.4rem); }.northstar-case-head > a { margin-top: 1.7rem; }.northstar-case-image { min-height: 31rem; }.northstar-case-story { min-height: 25rem; }.northstar-case-outcomes { grid-template-columns: 1fr; }.northstar-case-outcomes article { min-height: 8rem; }.northstar-case-next { grid-column: auto; min-height: 5rem; }
+  .northstar-shell { padding: 1rem; }.northstar-overview-intro { margin-top: 4.2rem; text-align: left; }.northstar-overview-intro h1 { font-size: clamp(3.8rem, 20vw, 5.1rem); }.northstar-overview-intro p { margin-left: 0; }.northstar-bento { grid-template-columns: 1fr; grid-template-areas: "confidence" "quote-one" "statement" "quote-two" "cta" "note"; grid-template-rows: auto; }.northstar-card { min-height: 13rem; }.northstar-card--confidence { min-height: 25rem; }.northstar-card--statement { min-height: 19rem; }.northstar-card--quote-two { min-height: 17rem; }.northstar-metrics-section { padding-top: 7rem; padding-bottom: 3rem; }.northstar-metrics-lead h1 { font-size: clamp(3.25rem, 15vw, 4.35rem); }.northstar-metrics-row { gap: 2.3rem 1rem; margin-top: 4rem; }.northstar-metrics-row .northstar-counter { font-size: clamp(3rem, 17vw, 4.6rem); }.northstar-approach { margin: 7rem 0 4rem; }.northstar-approach p { font-size: clamp(2.05rem, 11vw, 3rem); }.northstar-results-grid { grid-template-columns: 1fr; }.northstar-result-card--atlas,.northstar-result-card--conversion { grid-row: auto; min-height: 27rem; }.northstar-result-card--score,.northstar-result-card--pipeline { min-height: 15rem; }.northstar-case-head { display: block; margin-top: 4.3rem; }.northstar-case-head h1 { font-size: clamp(4rem, 19vw, 5.4rem); }.northstar-case-head > a { margin-top: 1.7rem; }.northstar-case-image { min-height: 31rem; }.northstar-case-story { min-height: 25rem; }.northstar-case-outcomes { grid-template-columns: 1fr; }.northstar-case-outcomes article { min-height: 8rem; }.northstar-case-next { grid-column: auto; min-height: 5rem; }
 }
 
 .northstar-conversion-headline { line-height: 1.04; }
@@ -521,9 +447,9 @@ export function NorthstarBack() {
 ## 6. Acceptance criteria
 
 - The route renders the bento, inline metrics, results grid, and fictional Atlas House link.
-- No navbar, footer, Framefield mark, catalog CTA, or Back to library control is present inside the standalone section.
+- No navbar, footer, unrelated branding, site CTA, or return navigation is present inside the standalone section.
 - All four image URLs are used in their intended surfaces.
 - Animated numbers use tabular numerals and respect reduced motion.
 - The experience-signal headline does not overlap or create an awkward third line at 390px or 1440px.
 - The layout has no horizontal overflow at 390×844, 820px, and 1440×900.
-- The host catalog may use the separate `preview.mp4` URL as a muted, looping card preview with a local/hosted image fallback.
+- The optional `preview.mp4` URL is only a delivery preview artifact; the standalone section uses the four image assets above.

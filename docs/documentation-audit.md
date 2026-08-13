@@ -441,4 +441,10 @@ Per 2026-08-12:
 - Reason: NORTHSTAR sudah melewati visual QA dan membutuhkan live preview catalog yang sesuai dengan route final, sementara prompt harus reusable tanpa membawa wrapper Framefield.
 - Source of truth updated: `library/sections/northstar-testimonials/metadata.ts`, `src/app/page.tsx`, `public/library/sections/northstar-testimonials/preview.mp4`, kedua salinan `master-prompt.md`, `library/sections/northstar-testimonials/design.md`, dan tests.
 - R2 delivery: bucket `framefield-assets`, prefix `sections/northstar-testimonials/`; uploaded `preview.mp4`, `atlas-house-portrait.webp`, `cobalt-data-field.webp`, `performance-orbit.webp`, dan `pipeline-texture.webp`. `master-prompt.md` tidak di-upload.
+
+### 2026-08-13 — Documentation and standalone prompt cleanup
+
+- Decision: Menyamakan Material Office design contract dengan metadata published dan menandai reduced-motion QA selesai. Master prompt NORTHSTAR dirapikan menjadi standalone variant tanpa helper return control, host navigation, atau CSS navigation residue; tombol universal tetap hanya berada di preview route aktual.
+- Reason: Audit menemukan status Material Office masih tertulis `review`, sementara prompt NORTHSTAR menyalin wrapper navigasi route ke dalam source standalone.
+- Source of truth updated: `library/sections/material-office/design.md`, kedua salinan `library/sections/northstar-testimonials/master-prompt.md`, dan focused regression tests.
 - Follow-up: Catalog card memakai video muted/looping dengan fallback `cobalt-data-field.webp`; source delivery, licensing, authentication, dan payment tetap di luar scope.
