@@ -717,6 +717,9 @@ a {
 .thumbnail.selected-works::after {
   display: none;
 }
+.thumbnail.northstar-testimonials::after {
+  display: none;
+}
 .thumbnail.aster:after {
   display: none;
 }

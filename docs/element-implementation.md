@@ -38,6 +38,12 @@ Framefield mengenal empat tipe asset:
 
 Setiap work memiliki child detail page di `/library/sections/4-selected-works-1/<slug>` yang memuat brief, direction, stack, visual study, komponen yang dipakai oleh package, serta link previous/next. Label `Fictional case study` wajib dipertahankan agar showcase tidak disalahpahami sebagai client work.
 
+## 1B. NORTHSTAR Testimonials / fictional proof section
+
+`NORTHSTAR Testimonials` adalah satu section proof dengan overview route `/library/sections/northstar-testimonials` dan satu fictional Atlas House detail route. Overview menyatukan bento testimonial dan metrics story inline; tidak ada navbar atau footer. Metadata, fictional content, source, dan route hidup di `library/sections/northstar-testimonials/`.
+
+Package ini memakai empat WebP original untuk full preview dan `preview.mp4` untuk live catalog preview. Kelima visual asset dipublikasikan ke R2 pada `sections/northstar-testimonials/`; master prompt code-first tersedia di package/public path dan tidak masuk R2.
+
 ## 2. Struktur asset package
 
 Struktur yang direkomendasikan:

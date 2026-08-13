@@ -9,6 +9,7 @@ Dokumentasi Framefield dibagi berdasarkan tanggung jawab. Setiap keputusan hanya
 | [Framefield Overview](./framefield-overview.md) | Apa produk ini, bagaimana website-nya tersusun, dan sejauh mana progress-nya? | Product scope, current status, shipped vs planned |
 | [Element Implementation](./element-implementation.md) | Bagaimana setiap section/visual/prompt dibangun dan dibuka sebagai full preview? | Asset package, route, metadata, preview contract |
 | [4 Selected Works (1) Design Contract](../library/sections/4-selected-works-1/design.md) | Bagaimana satu template works dan empat child project-nya disusun? | Work identities, nested route contract, visual and interaction rules |
+| [NORTHSTAR Testimonials Design Contract](../library/sections/northstar-testimonials/design.md) | Bagaimana testimonials, metrics, dan fictional case study disusun? | NORTHSTAR identity, proof routes, original visual assets, and motion rules |
 | [Development Workflow](./development-workflow.md) | Bagaimana proses kerja dari referensi sampai asset masuk katalog? | End-to-end delivery workflow |
 | [Documentation Audit](./documentation-audit.md) | Bagaimana memastikan docs tetap akurat dan tidak mengulang? | Feature ledger, change log, review checklist |
 | [Element Design Template](./templates/element-design.md) | Apa isi `design.md` untuk satu elemen? | Per-asset design brief |
@@ -32,6 +33,6 @@ Jika sebuah informasi tidak tahu harus ditaruh di mana, tambahkan ke dokumen yan
 
 ## Status dokumentasi
 
-Dokumen-dokumen ini menjadi sistem kerja aktif untuk pengembangan asset Framefield. Material Office adalah implementasi Hero pertama dan `4 Selected Works (1)` adalah template works pertama; keduanya mengikuti kontrak package, route, metadata, asset, prompt, dan audit yang sama.
+Dokumen-dokumen ini menjadi sistem kerja aktif untuk pengembangan asset Framefield. Material Office adalah implementasi Hero pertama, `4 Selected Works (1)` adalah template works pertama, dan NORTHSTAR Testimonials adalah section proof pertama; semuanya mengikuti kontrak package, route, metadata, asset, dan audit yang sama.
 
 Dokumen di `docs/superpowers/plans/` dan `docs/superpowers/specs/` adalah snapshot historis dari keputusan sebelum implementasi. Jika isinya berbeda dengan status terbaru, gunakan `framefield-overview.md`, `element-implementation.md`, asset `design.md`, dan `documentation-audit.md` sebagai current truth.

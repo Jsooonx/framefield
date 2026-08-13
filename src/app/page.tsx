@@ -16,6 +16,7 @@ import {
 import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { materialOfficeAsset } from "../../library/sections/material-office/metadata";
 import { selectedWorksAsset } from "../../library/sections/4-selected-works-1/metadata";
+import { northstarTestimonialsAsset } from "../../library/sections/northstar-testimonials/metadata";
 
 type AssetKind = "Visual" | "Prompt" | "Section";
 type AssetFilter = "All" | "Visuals" | "Prompts" | "Sections";
@@ -68,6 +69,21 @@ const ASSETS: Asset[] = [
     previewVideo: selectedWorksAsset.previewVideo,
     previewUrl: selectedWorksAsset.route,
     promptUrl: selectedWorksAsset.promptUrl,
+  },
+  {
+    id: 8,
+    title: northstarTestimonialsAsset.title,
+    description: "A cobalt-led testimonial bento with fictional proof, metrics, and a case study.",
+    kind: "Section",
+    category: northstarTestimonialsAsset.category,
+    stack: "Next.js",
+    access: northstarTestimonialsAsset.access,
+    accent: "blue",
+    thumbnail: "northstar-testimonials",
+    previewImage: northstarTestimonialsAsset.preview,
+    previewVideo: northstarTestimonialsAsset.previewVideo,
+    previewUrl: northstarTestimonialsAsset.route,
+    promptUrl: northstarTestimonialsAsset.promptUrl,
   },
   {
     id: 1,

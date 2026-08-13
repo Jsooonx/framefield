@@ -24,7 +24,7 @@ Setiap perubahan product-level harus masuk ke ledger ini atau ke entry baru di b
 | Feature / capability | Status | First documented | Current source | Notes |
 | --- | --- | --- | --- | --- |
 | Homepage editorial shell | Shipped | `framefield-overview.md` | `src/app/page.tsx` | Hero, library, pricing, footer |
-| Homepage landing catalog placeholders | Shipped temporarily | `framefield-overview.md` | `src/app/page.tsx` | Hanya card yang belum memiliki implementation; dua entry pertama sudah terisi |
+| Homepage landing catalog placeholders | Shipped temporarily | `framefield-overview.md` | `src/app/page.tsx` | Hanya card yang belum memiliki implementation; tiga entry pertama sudah terisi |
 | Dedicated full preview routes | Shipped | `element-implementation.md` | `src/app/library/sections/material-office/page.tsx` | Pertama tersedia di `/library/sections/material-office`; production smoke test sudah mencakup route ini |
 | Material Office hero + menu | Shipped (video active) | `library/sections/material-office/design.md` | `library/sections/material-office/source/MaterialOffice.tsx` | Video dan catalog WebP sudah tersedia |
 | 4 Selected Works (1) template | Shipped | `library/sections/4-selected-works-1/design.md` | `library/sections/4-selected-works-1/metadata.ts`, `src/app/library/sections/4-selected-works-1/` | Satu template editorial dengan empat fictional child project, delapan visual WebP lokal, dan standalone master prompt |
@@ -165,7 +165,7 @@ Audit tidak perlu membuat dokumen baru setiap kali. Jika perubahan kecil, update
 Per 2026-08-12:
 
 - Homepage shell sudah ada.
-- Catalog masih berisi placeholder untuk asset lain; Material Office sudah menjadi asset live pertama.
+- Catalog masih berisi placeholder untuk asset lain; Material Office, `4 Selected Works (1)`, dan NORTHSTAR sudah menjadi tiga asset live.
 - `4 Selected Works (1)` tersedia sebagai satu template di Library, dengan empat static-generated child route, delapan visual WebP lokal, preview project index editorial terang, dan master prompt code-first yang disalin ke package/public path.
 - Material Office memiliki package, poster fallback, metadata, catalog entry, source, dan full preview route yang sudah diverifikasi.
 - Automated WebP recording pipeline belum ada; Material Office sudah memiliki recording source dan catalog WebP hasil proses manual.
@@ -423,3 +423,22 @@ Per 2026-08-12:
 - Reason: Menyamakan metadata, docs, dan delivery asset dengan status produk yang sebenarnya tanpa mencampur source repository dengan user download/licensing flow.
 - Source of truth updated: `library/sections/material-office/metadata.ts`, `library/sections/4-selected-works-1/metadata.ts`, docs current-truth, dan R2 bucket `framefield-assets`.
 - Follow-up: Source delivery/download, licensing, authentication, dan payment tetap berada di luar scope saat ini.
+
+### 2026-08-13 â€” NORTHSTAR Testimonials section added
+
+- Type: Added
+- Area: UI | Asset pipeline | Documentation
+- Decision: Menambahkan satu package section `northstar-testimonials` dengan overview route berisi bento testimonial index dan metric story inline, serta satu fictional Atlas House case-study route. Package memakai empat aset raster original lokal yang tampil di bento dan metrics, satu catalog card `Free`, return control `Back to library`, staggered motion, dan counter yang menghormati reduced motion. Tidak ada navbar atau footer pada kedua route.
+- Reason: Menambah asset testimonials yang mandiri dari lima reference screenshot tanpa membawa brand, copy, orang, metrik, atau komposisi referensi.
+- Source of truth updated: `library/sections/northstar-testimonials/`, `public/library/sections/northstar-testimonials/`, `src/app/library/sections/northstar-testimonials/`, `src/app/page.tsx`, `src/app/globals.css`, `tests/northstar-testimonials.test.mjs`, dan docs current-truth.
+- Follow-up: Selesai pada 2026-08-13 melalui catalog recording, metadata published, master prompt, dan R2 visual delivery.
+
+### 2026-08-13 — NORTHSTAR catalog video, prompt, and R2 delivery
+
+- Type: Changed | Added
+- Area: Catalog rendering | Asset pipeline | Prompt product | Documentation
+- Decision: Memindahkan export `export-1786594702443.mp4` ke `public/library/sections/northstar-testimonials/preview.mp4`, menghubungkannya sebagai `previewVideo` catalog NORTHSTAR, dan menetapkan metadata menjadi `published`. Master prompt standalone code-first dibuat di package serta public path; hanya lima aset visual yang di-upload ke R2.
+- Reason: NORTHSTAR sudah melewati visual QA dan membutuhkan live preview catalog yang sesuai dengan route final, sementara prompt harus reusable tanpa membawa wrapper Framefield.
+- Source of truth updated: `library/sections/northstar-testimonials/metadata.ts`, `src/app/page.tsx`, `public/library/sections/northstar-testimonials/preview.mp4`, kedua salinan `master-prompt.md`, `library/sections/northstar-testimonials/design.md`, dan tests.
+- R2 delivery: bucket `framefield-assets`, prefix `sections/northstar-testimonials/`; uploaded `preview.mp4`, `atlas-house-portrait.webp`, `cobalt-data-field.webp`, `performance-orbit.webp`, dan `pipeline-texture.webp`. `master-prompt.md` tidak di-upload.
+- Follow-up: Catalog card memakai video muted/looping dengan fallback `cobalt-data-field.webp`; source delivery, licensing, authentication, dan payment tetap di luar scope.
