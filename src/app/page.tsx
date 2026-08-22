@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { AnimatePresence, motion } from "motion/react";
 import {
@@ -17,6 +17,7 @@ import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { materialOfficeAsset } from "../../library/sections/material-office/metadata";
 import { selectedWorksAsset } from "../../library/sections/4-selected-works-1/metadata";
 import { northstarTestimonialsAsset } from "../../library/sections/northstar-testimonials/metadata";
+import { valenOchreHeroAsset } from "../../library/sections/valen-ochre-hero/metadata";
 
 type AssetKind = "Visual" | "Prompt" | "Section";
 type AssetFilter = "All" | "Visuals" | "Prompts" | "Sections";
@@ -84,6 +85,21 @@ const ASSETS: Asset[] = [
     previewVideo: northstarTestimonialsAsset.previewVideo,
     previewUrl: northstarTestimonialsAsset.route,
     promptUrl: northstarTestimonialsAsset.promptUrl,
+  },
+  {
+    id: 9,
+    title: valenOchreHeroAsset.title,
+    description: "A luxury architectural atelier hero with fluted walnut paneling, ambient downlights, dual scenes, and scroll-driven monograph zoom-out.",
+    kind: "Section",
+    category: valenOchreHeroAsset.category,
+    stack: "Next.js",
+    access: valenOchreHeroAsset.access,
+    accent: "orange",
+    thumbnail: "valen-ochre-hero",
+    previewImage: valenOchreHeroAsset.preview,
+    previewVideo: valenOchreHeroAsset.previewVideo,
+    previewUrl: valenOchreHeroAsset.route,
+    promptUrl: valenOchreHeroAsset.promptUrl,
   },
   {
     id: 1,

@@ -24,11 +24,14 @@ Setiap perubahan product-level harus masuk ke ledger ini atau ke entry baru di b
 | Feature / capability | Status | First documented | Current source | Notes |
 | --- | --- | --- | --- | --- |
 | Homepage editorial shell | Shipped | `framefield-overview.md` | `src/app/page.tsx` | Hero, library, pricing, footer |
-| Homepage landing catalog placeholders | Shipped temporarily | `framefield-overview.md` | `src/app/page.tsx` | Hanya card yang belum memiliki implementation; tiga entry pertama sudah terisi |
-| Dedicated full preview routes | Shipped | `element-implementation.md` | `src/app/library/sections/material-office/page.tsx` | Pertama tersedia di `/library/sections/material-office`; production smoke test sudah mencakup route ini |
+| Homepage landing catalog placeholders | Shipped temporarily | `framefield-overview.md` | `src/app/page.tsx` | Hanya card yang belum memiliki implementation; lima entry pertama sudah terisi |
+| Dedicated full preview routes | Shipped | `element-implementation.md` | `src/app/library/sections/` | Tersedia untuk 5 asset package mandiri |
 | Material Office hero + menu | Shipped (video active) | `library/sections/material-office/design.md` | `library/sections/material-office/source/MaterialOffice.tsx` | Video dan catalog WebP sudah tersedia |
 | 4 Selected Works (1) template | Shipped | `library/sections/4-selected-works-1/design.md` | `library/sections/4-selected-works-1/metadata.ts`, `src/app/library/sections/4-selected-works-1/` | Satu template editorial dengan empat fictional child project, delapan visual WebP lokal, dan standalone master prompt |
-| WebP preview recording | Shipped (asset pertama) | `element-implementation.md` | `public/library/sections/material-office/preview.webp` | Dibuat dari export preview route |
+| NORTHSTAR Testimonials proof section | Shipped | `library/sections/northstar-testimonials/design.md` | `library/sections/northstar-testimonials/source/NorthstarTestimonials.tsx` | Section testimonials bento + metrics story dengan 4 visual WebP dan live preview video MP4 |
+| KINFORM Spatial Hero section | Shipped | `library/sections/kinform-spatial-hero/design.md` | `library/sections/kinform-spatial-hero/source/KinformHero.tsx` | Editorial spatial studio hero dengan ambient lighting dan integrated navbar |
+| Valen & Ochre Studio Hero section | Shipped | `library/sections/valen-ochre-hero/design.md` | `library/sections/valen-ochre-hero/source/ValenOchreHero.tsx` | Luxury Nordic modernism hero dengan dual-scene crossfade switcher, interactive modal drawers, R2 assets, dan live video preview |
+| WebP preview recording | Shipped | `element-implementation.md` | `public/library/sections/` | Fallback preview visual untuk semua asset |
 | User upload/CMS | Out of scope | `framefield-overview.md` | Tidak ada | Repository tetap jadi sumber awal |
 | Payment/subscription backend | Out of scope | `framefield-overview.md` | Tidak ada | Jangan mendokumentasikan seolah sudah tersedia |
 
@@ -442,9 +445,29 @@ Per 2026-08-12:
 - Source of truth updated: `library/sections/northstar-testimonials/metadata.ts`, `src/app/page.tsx`, `public/library/sections/northstar-testimonials/preview.mp4`, kedua salinan `master-prompt.md`, `library/sections/northstar-testimonials/design.md`, dan tests.
 - R2 delivery: bucket `framefield-assets`, prefix `sections/northstar-testimonials/`; uploaded `preview.mp4`, `atlas-house-portrait.webp`, `cobalt-data-field.webp`, `performance-orbit.webp`, dan `pipeline-texture.webp`. `master-prompt.md` tidak di-upload.
 
-### 2026-08-13 — Documentation and standalone prompt cleanup
+### 2026-08-19 — ArcSphere Studio Hero integration
 
-- Decision: Menyamakan Material Office design contract dengan metadata published dan menandai reduced-motion QA selesai. Master prompt NORTHSTAR dirapikan menjadi standalone variant tanpa helper return control, host navigation, atau CSS navigation residue; tombol universal tetap hanya berada di preview route aktual.
-- Reason: Audit menemukan status Material Office masih tertulis `review`, sementara prompt NORTHSTAR menyalin wrapper navigasi route ke dalam source standalone.
-- Source of truth updated: `library/sections/material-office/design.md`, kedua salinan `library/sections/northstar-testimonials/master-prompt.md`, dan focused regression tests.
-- Follow-up: Catalog card memakai video muted/looping dengan fallback `cobalt-data-field.webp`; source delivery, licensing, authentication, dan payment tetap di luar scope.
+- Type: Added
+- Area: Catalog rendering | Asset pipeline | Library package | Preview routes
+- Decision: Mengintegrasikan asset section `arcsphere-hero` dari direktori testing ke dalam Framefield library package (`library/sections/arcsphere-hero/`), menyediakan dedicated full-screen preview route (`/library/sections/arcsphere-hero`), menyalin visual asset lokal ke `public/library/sections/arcsphere-hero/`, menambahkan universal return control `Back to library`, dan mendaftarkan kartu asset ke landing page catalog `src/app/page.tsx`.
+- Reason: Permintaan user untuk memasukkan implementasi ArcSphere Studio Hero ke dalam katalog dan library Framefield.
+- Source of truth updated: `library/sections/arcsphere-hero/`, `public/library/sections/arcsphere-hero/`, `src/app/library/sections/arcsphere-hero/`, `src/app/page.tsx`, dan docs audit.
+
+### 2026-08-20 — ArcSphere R2 asset upload and master prompt release
+
+- Type: Added | Changed
+- Area: Asset pipeline | Remote CDN | Prompt product | Catalog integration
+- Decision: Mengunggah visual assets `hero-bg.jpg` dan `hero-bg-2.jpg` ke Cloudflare R2 bucket `framefield-assets` pada prefix `sections/arcsphere-hero/` dengan public custom domain `https://assets.framefield.my.id/sections/arcsphere-hero/`. Menyusun master prompt code-first yang lengkap dan menyimpannya di `library/sections/arcsphere-hero/master-prompt.md` serta `public/library/sections/arcsphere-hero/master-prompt.md` yang terhubung ke aksi Copy Prompt katalog.
+- Reason: Permintaan user untuk mengunggah asset ke Cloudflare R2 dan melampirkan master prompt ke landing page catalog Framefield.
+- Source of truth updated: `library/sections/arcsphere-hero/master-prompt.md`, `public/library/sections/arcsphere-hero/master-prompt.md`, `library/sections/arcsphere-hero/metadata.ts`, R2 bucket `framefield-assets`, dan docs audit.
+
+### 2026-08-21 — Rebrand to Valen & Ochre Studio Hero and R2 CDN sync
+
+- Type: Changed | Added
+- Area: Rebrand | UI Design | Asset pipeline | Remote CDN | Catalog integration
+- Decision: Melakukan rebrand menyeluruh dari ArcSphere Studio menjadi `Valen & Ochre Studio Hero` (`valen-ochre-hero`), mengusung tema luxury Nordic modernism & interior architecture studio (Copenhagen & Zürich). Menyelaraskan seluruh komponen (`Navbar.tsx`, `Hero.tsx`, `Modal.tsx`, `ValenOchreHero.tsx`, `valen-ochre-hero.css`), memperbarui metadata dan preview route `/library/sections/valen-ochre-hero`, mengunggah seluruh aset visual (`hero-bg.jpg`, `hero-bg-2.jpg`, `preview.mp4`) ke Cloudflare R2 pada prefix `sections/valen-ochre-hero/`, menyusun code-first master prompt mandiri, dan memperbarui seluruh automated tests serta dokumentasi Framefield.
+- Reason: Permintaan user untuk me-rebrand total aset studio arsitektur, mengganti identitas dan visual imagery, serta menyinkronkan seluruh aset ke Cloudflare R2.
+- Source of truth updated: `library/sections/valen-ochre-hero/`, `public/library/sections/valen-ochre-hero/`, `src/app/library/sections/valen-ochre-hero/`, `src/app/page.tsx`, `src/app/globals.css`, `tests/valen-ochre-hero.test.mjs`, Cloudflare R2 bucket `framefield-assets` (`sections/valen-ochre-hero/`), dan docs current-truth.
+
+
+

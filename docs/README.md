@@ -10,6 +10,8 @@ Dokumentasi Framefield dibagi berdasarkan tanggung jawab. Setiap keputusan hanya
 | [Element Implementation](./element-implementation.md) | Bagaimana setiap section/visual/prompt dibangun dan dibuka sebagai full preview? | Asset package, route, metadata, preview contract |
 | [4 Selected Works (1) Design Contract](../library/sections/4-selected-works-1/design.md) | Bagaimana satu template works dan empat child project-nya disusun? | Work identities, nested route contract, visual and interaction rules |
 | [NORTHSTAR Testimonials Design Contract](../library/sections/northstar-testimonials/design.md) | Bagaimana testimonials, metrics, dan fictional case study disusun? | NORTHSTAR identity, proof routes, original visual assets, and motion rules |
+| [KINFORM Spatial Hero Design Contract](../library/sections/kinform-spatial-hero/design.md) | Bagaimana spatial hero editorial disusun? | KINFORM identity, typography, lighting, and motion rules |
+| [Valen & Ochre Studio Hero Design Contract](../library/sections/valen-ochre-hero/design.md) | Bagaimana luxury architecture hero dan dual-scene switcher disusun? | Valen & Ochre identity, dual-scene crossfade, modal drawers, and R2 asset delivery |
 | [Development Workflow](./development-workflow.md) | Bagaimana proses kerja dari referensi sampai asset masuk katalog? | End-to-end delivery workflow |
 | [Documentation Audit](./documentation-audit.md) | Bagaimana memastikan docs tetap akurat dan tidak mengulang? | Feature ledger, change log, review checklist |
 | [Element Design Template](./templates/element-design.md) | Apa isi `design.md` untuk satu elemen? | Per-asset design brief |
@@ -33,6 +35,6 @@ Jika sebuah informasi tidak tahu harus ditaruh di mana, tambahkan ke dokumen yan
 
 ## Status dokumentasi
 
-Dokumen-dokumen ini menjadi sistem kerja aktif untuk pengembangan asset Framefield. Material Office adalah implementasi Hero pertama, `4 Selected Works (1)` adalah template works pertama, dan NORTHSTAR Testimonials adalah section proof pertama; semuanya mengikuti kontrak package, route, metadata, asset, dan audit yang sama.
+Dokumen-dokumen ini menjadi sistem kerja aktif untuk pengembangan asset Framefield. Lima library asset telah dirilis: Material Office (Hero), `4 Selected Works (1)` (Works), NORTHSTAR Testimonials (Proof), KINFORM Spatial Hero (Hero), dan Valen & Ochre Studio Hero (Hero); semuanya mengikuti kontrak package, route, metadata, asset, dan audit yang sama.
 
 Dokumen di `docs/superpowers/plans/` dan `docs/superpowers/specs/` adalah snapshot historis dari keputusan sebelum implementasi. Jika isinya berbeda dengan status terbaru, gunakan `framefield-overview.md`, `element-implementation.md`, asset `design.md`, dan `documentation-audit.md` sebagai current truth.

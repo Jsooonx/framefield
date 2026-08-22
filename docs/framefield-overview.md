@@ -51,15 +51,15 @@ Komponen utama yang sudah ada:
 | Homepage editorial shell | Selesai | Hero, navigation, library, pricing, dan footer tersedia. |
 | Lichen Editorial color palette | Selesai | Palette aktif dipakai di `src/app/globals.css`. |
 | Framefield logo mark | Selesai | Asset berada di `public/framefield-mark.png`. |
-| Homepage landing catalog | Selesai | Landing page memuat tiga catalog entry yang sudah terisi (Material Office, `4 Selected Works (1)`, dan NORTHSTAR Testimonials) serta beberapa placeholder card untuk katalog yang belum dirilis. |
+| Homepage landing catalog | Selesai | Landing page memuat lima catalog entry yang sudah terisi (Material Office, `4 Selected Works (1)`, NORTHSTAR Testimonials, KINFORM Spatial Hero, dan Valen & Ochre Studio Hero) serta beberapa placeholder card untuk katalog yang belum dirilis. |
 | Empty/placeholder states | Selesai | Card menampilkan `Coming soon` dan `Preview soon` sesuai status; source CTA sudah dikonversi menjadi `Copy Prompt`. |
 | CTA hover motion | Selesai | Semua CTA utama memakai per-letter rolling track dan contrast color swap. |
-| Dedicated route per element | Selesai (3 asset) | Material Office, `4 Selected Works (1)`, dan NORTHSTAR Testimonials tersedia melalui dedicated route masing-masing. NORTHSTAR memiliki route overview dengan metrics inline serta Atlas House case study. |
-| Asset package per element | Selesai (3 asset) | Ketiga asset memiliki references, design contract, source, metadata, dedicated route, dan catalog fallback image di package masing-masing. |
-| Full preview recording → WebP/video | Selesai (3 asset) | Material Office, `4 Selected Works (1)`, dan NORTHSTAR memiliki fallback image serta `preview.mp4` sebagai live catalog preview source. |
+| Dedicated route per element | Selesai (5 asset) | Material Office, `4 Selected Works (1)`, NORTHSTAR Testimonials, KINFORM Spatial Hero, dan Valen & Ochre Studio Hero tersedia melalui dedicated route masing-masing. NORTHSTAR memiliki route overview dengan metrics inline serta Atlas House case study. |
+| Asset package per element | Selesai (5 asset) | Kelima asset memiliki references, design contract, source, metadata, dedicated route, dan catalog fallback image di package masing-masing. |
+| Full preview recording → WebP/video | Selesai (5 asset) | Material Office, `4 Selected Works (1)`, NORTHSTAR, KINFORM, dan Valen & Ochre memiliki fallback image serta `preview.mp4` sebagai live catalog preview source. |
 | Selected Works template section | Selesai | Library memiliki satu asset card `Selected Works` yang membuka full preview section. |
 | Fictional case-study child routes | Selesai | Empat route project berada di bawah `/library/sections/4-selected-works-1/<slug>` dan static-generated saat build. |
-| Prompt copy flow | Selesai (3 asset) | Catalog card Material Office, `4 Selected Works (1)`, dan NORTHSTAR menyediakan CTA `Copy Prompt` yang mengambil master prompt code-first; dedicated preview tidak membawa CTA katalog. |
+| Prompt copy flow | Selesai (5 asset) | Catalog card Material Office, `4 Selected Works (1)`, NORTHSTAR, KINFORM, dan Valen & Ochre menyediakan CTA `Copy Prompt` yang mengambil master prompt code-first; dedicated preview tidak membawa CTA katalog. |
 | Source delivery/download flow | Belum dimulai | `sourceAvailable` hanya berarti source implementation/prompt tersedia di repository; belum ada backend download, auth, licensing, atau payment flow. |
 | CMS/admin input | Belum dimulai | Untuk fase awal, asset registry masih dikelola dari repository. |
 
@@ -69,7 +69,7 @@ Yang termasuk scope saat ini:
 
 - Website katalog Framefield.
 - Section dan website implementation yang bisa dibuka full-screen.
-- Preview ringan berbentuk WebP.
+- Preview ringan berbentuk WebP dan MP4.
 - Prompt dan visual assets sebagai tipe asset katalog.
 - Dokumentasi desain dan implementasi per asset.
 - Fictional case studies sebagai showcase terkurasi; ini bukan marketplace client work.
@@ -99,5 +99,7 @@ Fitur yang masuk atau keluar dari scope harus dicatat di [Documentation Audit](.
 - Original Stackframe tetap dianggap project terpisah dan tidak menjadi target perubahan.
 - `4 Selected Works (1)` memakai delapan visual WebP fictional original (dua per case study), detail page archive dengan staggered Motion entrance, dan standalone master prompt code-first yang menunjuk ke R2, sehingga halaman dapat dipreview penuh tanpa SVG study atau dependensi remote.
 - NORTHSTAR Testimonials memakai empat visual WebP original dan recording `preview.mp4` 1440×810 sebagai live catalog preview; kelima aset visual tersedia di R2 pada prefix `sections/northstar-testimonials/`, sedangkan master prompt tetap di package/public repository path.
+- KINFORM Spatial Hero memakai visual interior hero-poster dan standalone master prompt code-first yang menunjuk ke R2.
+- Valen & Ochre Studio Hero memakai background visual dual-scene resolusi tinggi (`hero-bg.jpg` dan `hero-bg-2.jpg`) serta live catalog preview `preview.mp4` yang di-host di Cloudflare R2 (`https://assets.framefield.my.id/sections/valen-ochre-hero/`), dengan standalone code-first master prompt yang terhubung ke aksi Copy Prompt katalog.
 
 Detail brand yang lebih lengkap tetap berada di [Brand Foundation](../branding.md); dokumen ini hanya menyimpan keputusan yang dibutuhkan untuk memahami product scope dan status.

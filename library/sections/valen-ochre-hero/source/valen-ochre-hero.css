@@ -1,0 +1,1200 @@
+/* ==========================================================================
+   Valen & Ochre Studio Hero — Scoped Stylesheet
+   Architecture: Pure Scoped CSS, Responsive, Accessible, Reduced-Motion Ready
+   ========================================================================== */
+
+.valen-root {
+  min-height: 100vh;
+  min-height: 100svh;
+  background-color: #ECE7E1;
+  color: #242320;
+  position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+.valen-root *,
+.valen-root *::before,
+.valen-root *::after {
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   0. Sticky Scroll Track Architecture
+   ========================================================================== */
+
+.valen-scroll-track {
+  position: relative;
+  width: 100%;
+  height: 240vh; /* Smooth generous scroll depth */
+}
+
+.valen-sticky-stage {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  background-color: #ECE7E1;
+}
+
+/* ==========================================================================
+   1. Header & Navigation
+   ========================================================================== */
+
+.valen-header {
+  width: 100%;
+  background-color: #ECE7E1;
+  color: #242320;
+  padding: clamp(14px, 1.8vw, 22px) clamp(16px, 3.5vw, 64px);
+  position: relative;
+  z-index: 30;
+  flex-shrink: 0;
+}
+
+.valen-nav-container {
+  max-width: 1720px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.valen-nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2.5vw, 44px);
+}
+
+.valen-nav-link {
+  position: relative;
+  font-size: clamp(11.5px, 0.9vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  color: #4A4641;
+  text-decoration: none;
+  padding: 6px 0;
+  transition: color 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
+}
+
+.valen-nav-link:hover,
+.valen-nav-link:focus-visible {
+  color: #121110;
+  transform: translateY(-1px);
+}
+
+.valen-nav-link:focus-visible {
+  outline: 2px solid #2D2B28;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.valen-nav-underline {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: #1E1D1B;
+  border-radius: 2px;
+}
+
+.valen-logo-wrapper {
+  flex: 1;
+  text-align: center;
+}
+
+.valen-logo {
+  display: inline-flex;
+  align-items: center;
+  font-size: clamp(19px, 1.7vw, 24px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: #1E1D1B;
+  text-decoration: none;
+  transition: opacity 0.3s ease, letter-spacing 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+.valen-logo:hover,
+.valen-logo:focus-visible {
+  opacity: 0.88;
+  letter-spacing: -0.005em;
+  transform: scale(1.01);
+}
+
+.valen-logo:focus-visible {
+  outline: 2px solid #2D2B28;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.valen-cta-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.valen-contact-btn {
+  background-color: #2D2B28;
+  color: #F5F2EE;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.valen-contact-btn:hover {
+  background-color: #1A1917;
+  border-color: rgba(212, 163, 115, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18), 0 0 14px rgba(212, 163, 115, 0.18);
+  transform: translateY(-1px);
+}
+
+.valen-contact-btn:focus-visible {
+  outline: 2px solid #2D2B28;
+  outline-offset: 3px;
+}
+
+.valen-contact-btn:active {
+  transform: scale(0.97);
+}
+
+.valen-mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: 8px;
+  color: #2D2B28;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.valen-mobile-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+  transform: scale(1.05);
+}
+
+.valen-mobile-drawer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 16px;
+  padding-bottom: 8px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 12px;
+  background: #ECE7E1;
+}
+
+.valen-mobile-drawer a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #33312E;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.valen-mobile-drawer a:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #000000;
+}
+
+.valen-mobile-contact-btn {
+  width: 100%;
+  background-color: #2D2B28;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 12px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.valen-mobile-contact-btn:hover {
+  background-color: #161514;
+}
+
+/* ==========================================================================
+   2. Main Hero Section & Viewport Canvas
+   ========================================================================== */
+
+.valen-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+
+.valen-hero-section {
+  width: 100%;
+  background-color: #ECE7E1;
+  padding: 4px clamp(12px, 2.8vw, 48px) clamp(16px, 3vw, 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Gallery Header that fades in when zoom out occurs */
+.valen-gallery-header {
+  position: absolute;
+  top: clamp(14px, 2.5vh, 28px);
+  text-align: center;
+  z-index: 15;
+  pointer-events: none;
+  width: 100%;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.valen-gallery-tag {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #8C867E;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.valen-gallery-title {
+  font-size: clamp(18px, 1.8vw, 24px);
+  font-weight: 400;
+  color: #1E1D1B;
+  margin: 0;
+  letter-spacing: -0.02em;
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+/* Gallery Stage */
+.valen-gallery-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 1720px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.valen-canvas {
+  position: relative;
+  width: 100%;
+  height: 82vh;
+  min-height: 580px;
+  max-height: 920px;
+  border-radius: clamp(22px, 2.6vw, 44px);
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22), 0 4px 12px rgba(0, 0, 0, 0.12);
+  background-color: #1A1816;
+  z-index: 10;
+  transform-origin: center center;
+  transition: box-shadow 0.4s ease;
+}
+
+.valen-canvas:hover {
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.38), 0 6px 20px rgba(0, 0, 0, 0.18);
+}
+
+.valen-bg-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.valen-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.96) contrast(1.04);
+}
+
+/* ==========================================================================
+   3. Flanking Side Gallery Cards (Emerging on Scroll Zoom-Out)
+   ========================================================================== */
+
+.valen-side-card {
+  position: absolute;
+  width: clamp(190px, 17vw, 270px);
+  height: clamp(270px, 37vh, 390px);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: 15;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.valen-side-left {
+  right: calc(50% + 25.5vw);
+  margin-top: 28px; /* Tasteful asymmetric elevation */
+}
+
+.valen-side-right {
+  left: calc(50% + 25.5vw);
+  margin-top: -20px; /* Tasteful asymmetric elevation */
+}
+
+.valen-side-card:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.valen-side-card:focus-visible {
+  outline: 2px solid #2D2B28;
+  outline-offset: 6px;
+  border-radius: 20px;
+}
+
+.valen-side-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #201E1C;
+}
+
+.valen-side-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+}
+
+.valen-side-card:hover .valen-side-img-wrap img {
+  transform: scale(1.06);
+  filter: brightness(1.04);
+}
+
+.valen-side-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%);
+  transition: opacity 0.3s ease;
+}
+
+.valen-side-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(10, 9, 8, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #FFFFFF;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.valen-side-card:hover .valen-side-badge {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.valen-card-caption {
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.valen-center-caption {
+  position: absolute;
+  bottom: clamp(14px, 3vh, 28px);
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 15;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.valen-caption-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7A746D;
+  font-weight: 700;
+}
+
+.valen-caption-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1E1D1B;
+  margin: 2px 0 0 0;
+  letter-spacing: -0.01em;
+}
+
+.valen-caption-loc {
+  font-size: 11.5px;
+  color: #6C665F;
+  margin: 0;
+}
+
+/* ==========================================================================
+   4. Architectural Lighting & Vignettes
+   ========================================================================== */
+
+.valen-lighting-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.valen-spotlight {
+  position: absolute;
+  top: 0;
+  width: clamp(120px, 15vw, 220px);
+  height: clamp(160px, 22vw, 260px);
+  background: radial-gradient(ellipse at top, rgba(254, 243, 199, 0.28) 0%, rgba(245, 158, 11, 0.06) 55%, transparent 80%);
+  filter: blur(28px);
+  transform: translateX(-50%);
+  transition: opacity 0.5s ease;
+}
+
+.valen-canvas:hover .valen-spotlight {
+  opacity: 1.15;
+}
+
+.valen-top-vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 130px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.15) 60%, transparent);
+}
+
+.valen-bottom-vignette {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: clamp(280px, 45vh, 440px);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.52) 50%, transparent 100%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Scene Switcher */
+.valen-scene-switcher {
+  position: absolute;
+  top: clamp(16px, 2vw, 26px);
+  right: clamp(16px, 2vw, 26px);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(10, 9, 8, 0.52);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 4px 6px 4px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.valen-scene-switcher:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+  background-color: rgba(10, 9, 8, 0.68);
+}
+
+.valen-scene-label {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+  margin-right: 2px;
+  user-select: none;
+}
+
+.valen-scene-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 4px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.valen-scene-btn:hover,
+.valen-scene-btn:focus-visible {
+  color: #FFFFFF;
+}
+
+.valen-scene-btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 2px;
+}
+
+.valen-scene-btn.active {
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   5. Content Layer (Headline, Narrative, CTAs, Divider)
+   ========================================================================== */
+
+.valen-content-layer {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(20px, 3.8vw, 64px) clamp(20px, 3.8vw, 64px) clamp(22px, 3.2vw, 48px);
+}
+
+.valen-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr;
+  gap: clamp(24px, 3.5vw, 56px);
+  align-items: flex-end;
+  margin-bottom: clamp(24px, 3vw, 44px);
+}
+
+.valen-headline-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.valen-headline {
+  font-size: clamp(2.4rem, 5.2vw, 5.2rem);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  margin: 0;
+  user-select: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.valen-headline-line {
+  display: block;
+  overflow: hidden;
+}
+
+.valen-headline-line:nth-child(2) {
+  margin-top: 4px;
+  color: #FBF9F6;
+}
+
+.valen-narrative-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: clamp(0px, 1.5vw, 24px);
+}
+
+.valen-description {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(13.5px, 1.05vw, 16px);
+  line-height: 1.6;
+  font-weight: 300;
+  max-width: 440px;
+  margin: 0 0 clamp(20px, 2vw, 28px) 0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.valen-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.valen-btn-primary {
+  background-color: #F8F6F2;
+  color: #1E1D1B;
+  font-size: clamp(11px, 0.85vw, 12.5px);
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 13px clamp(22px, 2.2vw, 32px);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
+  transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.valen-btn-primary:hover {
+  background-color: #FFFFFF;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.38), 0 0 24px rgba(248, 246, 242, 0.32);
+  transform: translateY(-2px);
+}
+
+.valen-btn-primary:focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 3px;
+}
+
+.valen-btn-primary:active {
+  transform: scale(0.97);
+}
+
+.valen-btn-secondary {
+  background-color: rgba(45, 42, 38, 0.72);
+  color: #F5F2EE;
+  font-size: clamp(11px, 0.85vw, 12.5px);
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 13px clamp(22px, 2.2vw, 32px);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.valen-btn-secondary:hover {
+  background-color: rgba(58, 54, 48, 0.92);
+  border-color: rgba(212, 163, 115, 0.65);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32), inset 0 0 14px rgba(212, 163, 115, 0.15);
+  transform: translateY(-2px);
+  color: #FFFFFF;
+}
+
+.valen-btn-secondary:focus-visible {
+  outline: 2px solid rgba(212, 163, 115, 0.8);
+  outline-offset: 3px;
+}
+
+.valen-btn-secondary:active {
+  transform: scale(0.97);
+}
+
+.valen-divider-row {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-top: 8px;
+}
+
+.valen-hairline {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0.2) 60%, rgba(255, 255, 255, 0.08));
+  transition: background 0.3s ease;
+}
+
+.valen-canvas:hover .valen-hairline {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.26) 60%, rgba(255, 255, 255, 0.1));
+}
+
+.valen-star-icon {
+  position: absolute;
+  right: 0;
+  top: -6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease, color 0.3s ease;
+}
+
+.valen-star-icon:hover {
+  color: #FFFFFF;
+  transform: rotate(45deg) scale(1.22);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 22px rgba(245, 158, 11, 0.65));
+}
+
+/* ==========================================================================
+   6. Interactive Drawers / Modals
+   ========================================================================== */
+
+.valen-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 3vw, 40px);
+}
+
+.valen-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.76);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  cursor: pointer;
+}
+
+.valen-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  background: #1C1B19;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ECE7E1;
+  border-radius: clamp(20px, 2.5vw, 32px);
+  padding: clamp(24px, 3.5vw, 44px);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(212, 163, 115, 0.12);
+  overflow: hidden;
+  z-index: 10;
+}
+
+.valen-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.valen-modal-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  transform: rotate(90deg) scale(1.1);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.valen-modal-close:focus-visible {
+  outline: 2px solid rgba(212, 163, 115, 0.8);
+  outline-offset: 2px;
+}
+
+.valen-modal-tag {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #D4A373;
+  font-weight: 700;
+  display: block;
+}
+
+.valen-modal-title {
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 400;
+  color: #FFFFFF;
+  margin: 6px 0 10px 0;
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+.valen-modal-desc {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.55;
+  margin: 0 0 22px 0;
+}
+
+.valen-projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.valen-project-card {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.38);
+  padding: 12px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.valen-project-card:hover {
+  border-color: rgba(212, 163, 115, 0.5);
+  background-color: rgba(255, 255, 255, 0.04);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.valen-project-card:focus-visible {
+  outline: 2px solid rgba(212, 163, 115, 0.8);
+  outline-offset: 2px;
+}
+
+.valen-project-img-wrap {
+  height: 110px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  background: #202020;
+}
+
+.valen-project-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+}
+
+.valen-project-card:hover .valen-project-img-wrap img {
+  transform: scale(1.08);
+  filter: brightness(1.04);
+}
+
+.valen-project-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin: 0 0 2px 0;
+  transition: color 0.2s ease;
+}
+
+.valen-project-card:hover .valen-project-name {
+  color: #EDE8E3;
+}
+
+.valen-project-type {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+}
+
+.valen-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.valen-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.valen-input,
+.valen-textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #FFFFFF;
+  outline: none;
+  transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.valen-input:hover,
+.valen-textarea:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+.valen-input:focus,
+.valen-textarea:focus {
+  border-color: #D4A373;
+  background-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.18);
+}
+
+.valen-input::placeholder,
+.valen-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.valen-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.valen-location-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.valen-modal-btn {
+  background: #EDE8E3;
+  color: #1E1D1B;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.valen-modal-btn:hover {
+  background: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(212, 163, 115, 0.35);
+  transform: translateY(-1px);
+}
+
+.valen-modal-btn:focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 3px;
+}
+
+.valen-modal-btn:active {
+  transform: scale(0.97);
+}
+
+/* ==========================================================================
+   7. Universal Back to Library Control (Framefield Standard)
+   ========================================================================== */
+
+.valen-library-back {
+  position: fixed;
+  right: clamp(24px, 3.7vw, 56px);
+  bottom: 14px;
+  z-index: 50;
+  display: inline-flex;
+  gap: 9px;
+  min-height: 34px;
+  align-items: center;
+  padding: 5px 11px 5px 6px;
+  border: 1px solid rgba(243, 240, 231, 0.28);
+  border-radius: 999px;
+  color: #f3f0e7 !important;
+  background: rgba(16, 18, 20, 0.46);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.valen-library-back::after {
+  position: absolute;
+  inset: -5px;
+  content: "";
+}
+
+.valen-library-back:hover,
+.valen-library-back:focus-visible {
+  border-color: rgba(243, 240, 231, 0.58);
+  color: #c8ff4a !important;
+  background: rgba(16, 18, 20, 0.72);
+  transform: translateY(-1px);
+}
+
+.valen-library-back:active {
+  transform: scale(0.96);
+}
+
+.valen-library-back:focus-visible {
+  outline: 2px solid #c8ff4a;
+  outline-offset: 4px;
+}
+
+.valen-library-back-icon {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border: 1px solid rgba(243, 240, 231, 0.48);
+  border-radius: 50%;
+  color: #c8ff4a;
+  background: rgba(200, 255, 74, 0.08);
+  transition: border-color 180ms ease, background-color 180ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.valen-library-back:hover .valen-library-back-icon,
+.valen-library-back:focus-visible .valen-library-back-icon {
+  border-color: rgba(200, 255, 74, 0.72);
+  background: rgba(200, 255, 74, 0.16);
+  transform: translateX(-2px);
+}
+
+/* ==========================================================================
+   8. Responsive Breakpoints & Accessibility Overrides
+   ========================================================================== */
+
+@media (max-width: 992px) {
+  .valen-nav-links {
+    display: none;
+  }
+  .valen-cta-wrapper {
+    display: none;
+  }
+  .valen-mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .valen-logo-wrapper {
+    text-align: left;
+  }
+  .valen-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  .valen-narrative-col {
+    padding-left: 0;
+  }
+  .valen-side-card {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .valen-hero-section {
+    padding: 0;
+  }
+  .valen-canvas {
+    border-radius: 0;
+    min-height: calc(100svh - 60px);
+  }
+  .valen-content-layer {
+    padding: 20px 18px 24px;
+  }
+  .valen-headline {
+    font-size: clamp(2.2rem, 11vw, 3.4rem);
+  }
+  .valen-description {
+    font-size: 13.5px;
+    margin-bottom: 18px;
+  }
+  .valen-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .valen-btn-primary,
+  .valen-btn-secondary {
+    width: 100%;
+    text-align: center;
+    padding: 13px 20px;
+  }
+  .valen-projects-grid {
+    grid-template-columns: 1fr;
+  }
+  .valen-form-row {
+    grid-template-columns: 1fr;
+  }
+  .valen-modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .valen-modal-btn {
+    width: 100%;
+  }
+  .valen-scene-switcher {
+    top: 12px;
+    right: 12px;
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .valen-scroll-track {
+    height: auto !important;
+  }
+  .valen-sticky-stage {
+    position: relative !important;
+    height: auto !important;
+  }
+  .valen-canvas,
+  .valen-bg-image,
+  .valen-contact-btn,
+  .valen-btn-primary,
+  .valen-btn-secondary,
+  .valen-star-icon,
+  .valen-modal-card,
+  .valen-modal-close,
+  .valen-project-card,
+  .valen-project-img-wrap img,
+  .valen-side-card,
+  .valen-side-img-wrap img {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    transform: none !important;
+  }
+}

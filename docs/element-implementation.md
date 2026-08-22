@@ -44,6 +44,17 @@ Setiap work memiliki child detail page di `/library/sections/4-selected-works-1/
 
 Package ini memakai empat WebP original untuk full preview dan `preview.mp4` untuk live catalog preview. Kelima visual asset dipublikasikan ke R2 pada `sections/northstar-testimonials/`; master prompt code-first tersedia di package/public path dan tidak masuk R2.
 
+## 1C. KINFORM Spatial Hero / spatial studio demonstration
+
+`KINFORM Spatial Hero` adalah satu standalone hero package dengan route `/library/sections/kinform-spatial-hero`. Menampilkan konsep spatial studio arsitektural dengan editorial typography, ambient downlighting, dan integrated hero navbar. Metadata, source, dan route hidup di `library/sections/kinform-spatial-hero/`.
+
+## 1D. Valen & Ochre Studio Hero / Nordic architectural demonstration
+
+`Valen & Ochre Studio Hero` adalah satu standalone hero section package dengan route `/library/sections/valen-ochre-hero`. Mengusung tema luxury Nordic modernism & interior architecture studio di Copenhagen & Zürich: vertical fluted walnut paneling, atmospheric downlight spotlights, dual-scene crossfade switcher (`01 Wide`, `02 Center`), interactive portfolio & consultation drawers, serta video preview live di katalog landing page.
+
+Visual asset `hero-bg.jpg`, `hero-bg-2.jpg`, dan `preview.mp4` diunggah ke Cloudflare R2 pada prefix `sections/valen-ochre-hero/` (`https://assets.framefield.my.id/sections/valen-ochre-hero/`). Master prompt mandiri yang code-first dan production-ready disediakan di `library/sections/valen-ochre-hero/master-prompt.md` dan `public/library/sections/valen-ochre-hero/master-prompt.md`, terhubung ke tombol `Copy Prompt` katalog.
+
+
 ## 2. Struktur asset package
 
 Struktur yang direkomendasikan:

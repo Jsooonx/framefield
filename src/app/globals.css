@@ -1,4 +1,4 @@
-﻿@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap");
 
 /* Foundation: shared dark-theme tokens and browser resets. */
 :root {
@@ -718,6 +718,17 @@ a {
   display: none;
 }
 .thumbnail.northstar-testimonials::after {
+  display: none;
+}
+.thumbnail.arcsphere-hero::after,
+.thumbnail.valen-ochre-hero::after {
+  display: none;
+}
+.thumbnail.kinform-spatial-hero::after {
+  display: none;
+}
+.thumbnail:has(.thumbnail-video)::after,
+.thumbnail:has(.thumbnail-image)::after {
   display: none;
 }
 .thumbnail.aster:after {
